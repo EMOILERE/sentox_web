@@ -1,0 +1,652 @@
+{% extends "base.html" %}
+
+{% block title %}Comment Environment Analysis - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="analysis-header py-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <h1 class="h2 mb-2">
+                <i class="fas fa-chart-line me-3"></i>
+                Comment Environment Analysis
+            </h1>
+            <p class="text-muted mb-0">
+                Deep insights into your community's communication patterns, sentiment trends, and overall health metrics
+            </p>
+        </div>
+        <div class="col-lg-4 text-end">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary active">Live Analysis</button>
+                <button type="button" class="btn btn-outline-primary">Historical</button>
+                <button type="button" class="btn btn-outline-primary">Compare</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Overall Health Score -->
+<div class="row mb-4">
+    <div class="col-lg-4">
+        <div class="card health-score-card">
+            <div class="card-body text-center">
+                <h5 class="card-title mb-4">
+                    <i class="fas fa-heart me-2"></i>Community Health Score
+                </h5>
+                <div class="health-score-circle">
+                    <svg width="180" height="180" viewBox="0 0 180 180">
+                        <circle cx="90" cy="90" r="70" fill="none" stroke="#e9ecef" stroke-width="12"/>
+                        <circle cx="90" cy="90" r="70" fill="none" stroke="#28a745" stroke-width="12" 
+                                stroke-dasharray="440" stroke-dashoffset="57" stroke-linecap="round"/>
+                        <text x="90" y="85" text-anchor="middle" font-size="36" font-weight="bold" fill="#28a745">{{ data.overall_health_score }}</text>
+                        <text x="90" y="105" text-anchor="middle" font-size="14" fill="#6c757d">Excellent</text>
+                    </svg>
+                </div>
+                <p class="text-muted mt-3">
+                    Your community maintains a highly positive and safe environment with excellent engagement quality.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-chart-bar me-2"></i>Key Environment Metrics
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-item">
+                            <div class="metric-header">
+                                <span class="metric-label">Toxicity Level</span>
+                                <span class="metric-value text-success">{{ data.toxicity_level }}</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-success" style="width: 85%"></div>
+                            </div>
+                            <small class="text-muted">15% below platform average</small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-item">
+                            <div class="metric-header">
+                                <span class="metric-label">Engagement Quality</span>
+                                <span class="metric-value text-info">{{ data.engagement_quality }}</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-info" style="width: 92%"></div>
+                            </div>
+                            <small class="text-muted">22% above platform average</small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-item">
+                            <div class="metric-header">
+                                <span class="metric-label">Response Rate</span>
+                                <span class="metric-value text-primary">78.3%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-primary" style="width: 78%"></div>
+                            </div>
+                            <small class="text-muted">Creator engagement with audience</small>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6 mb-3">
+                        <div class="metric-item">
+                            <div class="metric-header">
+                                <span class="metric-label">Constructive Feedback</span>
+                                <span class="metric-value text-warning">89.2%</span>
+                            </div>
+                            <div class="progress">
+                                <div class="progress-bar bg-warning" style="width: 89%"></div>
+                            </div>
+                            <small class="text-muted">Comments provide valuable insights</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Sentiment Analysis -->
+<div class="row mb-4">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-smile me-2"></i>Sentiment Distribution
+                </h5>
+            </div>
+            <div class="card-body">
+                <canvas id="sentimentChart" height="200"></canvas>
+                <div class="sentiment-breakdown mt-3">
+                    <div class="sentiment-item">
+                        <div class="sentiment-color bg-success"></div>
+                        <div class="sentiment-info">
+                            <span class="sentiment-label">Positive</span>
+                            <span class="sentiment-percentage">{{ "%.1f%%" % data.sentiment_distribution.positive }}</span>
+                        </div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-color bg-secondary"></div>
+                        <div class="sentiment-info">
+                            <span class="sentiment-label">Neutral</span>
+                            <span class="sentiment-percentage">{{ "%.1f%%" % data.sentiment_distribution.neutral }}</span>
+                        </div>
+                    </div>
+                    <div class="sentiment-item">
+                        <div class="sentiment-color bg-danger"></div>
+                        <div class="sentiment-info">
+                            <span class="sentiment-label">Negative</span>
+                            <span class="sentiment-percentage">{{ "%.1f%%" % data.sentiment_distribution.negative }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-clock me-2"></i>Activity Timeline
+                </h5>
+            </div>
+            <div class="card-body">
+                <canvas id="timelineChart" height="200"></canvas>
+                <div class="timeline-insights mt-3">
+                    <div class="insight-item">
+                        <i class="fas fa-arrow-up text-success"></i>
+                        <span>Peak engagement: 2-4 PM</span>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-shield-alt text-info"></i>
+                        <span>Safest hours: 10 AM - 12 PM</span>
+                    </div>
+                    <div class="insight-item">
+                        <i class="fas fa-exclamation-triangle text-warning"></i>
+                        <span>Monitor late evening activity</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Content Categories -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-tags me-2"></i>Comment Content Analysis
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-8">
+                        <canvas id="contentCategoryChart" height="120"></canvas>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="category-insights">
+                            <h6>Top Conversation Topics</h6>
+                            <div class="topic-item">
+                                <span class="topic-label">Content Quality</span>
+                                <span class="topic-percentage">34.2%</span>
+                            </div>
+                            <div class="topic-item">
+                                <span class="topic-label">Technical Feedback</span>
+                                <span class="topic-percentage">28.7%</span>
+                            </div>
+                            <div class="topic-item">
+                                <span class="topic-label">Personal Stories</span>
+                                <span class="topic-percentage">19.1%</span>
+                            </div>
+                            <div class="topic-item">
+                                <span class="topic-label">Questions</span>
+                                <span class="topic-percentage">18.0%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Recommendations -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-lightbulb me-2"></i>AI-Powered Recommendations
+                </h5>
+            </div>
+            <div class="card-body">
+                {% for recommendation in data.recommendations %}
+                <div class="recommendation-item">
+                    <div class="recommendation-icon">
+                        <i class="fas fa-check-circle text-success"></i>
+                    </div>
+                    <div class="recommendation-content">
+                        <div class="recommendation-text">{{ recommendation }}</div>
+                        <div class="recommendation-impact">
+                            <span class="impact-label">Expected Impact:</span>
+                            <span class="impact-value text-success">+5-8% engagement</span>
+                        </div>
+                    </div>
+                    <div class="recommendation-actions">
+                        <button class="btn btn-sm btn-outline-primary">Apply</button>
+                        <button class="btn btn-sm btn-outline-secondary">Learn More</button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-bell me-2"></i>Environment Alerts
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="alert-item alert-info">
+                    <div class="alert-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Positive Trend</div>
+                        <div class="alert-message">Community sentiment improved by 12% this week</div>
+                        <div class="alert-time">2 hours ago</div>
+                    </div>
+                </div>
+                
+                <div class="alert-item alert-warning">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Engagement Drop</div>
+                        <div class="alert-message">Response rate decreased during weekend</div>
+                        <div class="alert-time">1 day ago</div>
+                    </div>
+                </div>
+                
+                <div class="alert-item alert-success">
+                    <div class="alert-icon">
+                        <i class="fas fa-shield-check"></i>
+                    </div>
+                    <div class="alert-content">
+                        <div class="alert-title">Safety Milestone</div>
+                        <div class="alert-message">30 days without toxic incidents</div>
+                        <div class="alert-time">3 days ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Export Options -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h6 class="mb-1">Export Analysis Report</h6>
+                        <small class="text-muted">Generate comprehensive reports for stakeholders</small>
+                    </div>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-primary">
+                            <i class="fas fa-file-pdf me-2"></i>PDF Report
+                        </button>
+                        <button class="btn btn-outline-success">
+                            <i class="fas fa-file-excel me-2"></i>Excel Data
+                        </button>
+                        <button class="btn btn-outline-info">
+                            <i class="fas fa-share-alt me-2"></i>Share Dashboard
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.analysis-header {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(155, 89, 182, 0.05) 100%);
+    border-radius: 10px;
+    margin: -1rem -15px 0 -15px;
+    padding: 2rem 15px;
+}
+
+.health-score-card {
+    border: none;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
+
+.health-score-circle {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.metric-item {
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.metric-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.metric-value {
+    font-weight: 700;
+}
+
+.progress {
+    height: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.sentiment-breakdown {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.sentiment-item {
+    display: flex;
+    align-items: center;
+}
+
+.sentiment-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 3px;
+    margin-right: 0.75rem;
+}
+
+.sentiment-info {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.sentiment-label {
+    font-weight: 500;
+}
+
+.sentiment-percentage {
+    font-weight: 600;
+}
+
+.timeline-insights, .category-insights {
+    margin-top: 1rem;
+}
+
+.insight-item, .topic-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #eee;
+}
+
+.insight-item i {
+    margin-right: 0.5rem;
+}
+
+.topic-label {
+    font-weight: 500;
+}
+
+.topic-percentage {
+    font-weight: 600;
+    color: #6c757d;
+}
+
+.recommendation-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    border-left: 4px solid #28a745;
+}
+
+.recommendation-icon {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.recommendation-content {
+    flex-grow: 1;
+}
+
+.recommendation-text {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.recommendation-impact {
+    font-size: 0.9rem;
+}
+
+.impact-label {
+    color: #6c757d;
+}
+
+.impact-value {
+    font-weight: 600;
+}
+
+.recommendation-actions {
+    margin-left: 1rem;
+}
+
+.alert-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.alert-item.alert-info {
+    background: rgba(23, 162, 184, 0.1);
+    border-left: 4px solid #17a2b8;
+}
+
+.alert-item.alert-warning {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #ffc107;
+}
+
+.alert-item.alert-success {
+    background: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid #28a745;
+}
+
+.alert-icon {
+    margin-right: 1rem;
+    font-size: 1.1rem;
+}
+
+.alert-item.alert-info .alert-icon {
+    color: #17a2b8;
+}
+
+.alert-item.alert-warning .alert-icon {
+    color: #ffc107;
+}
+
+.alert-item.alert-success .alert-icon {
+    color: #28a745;
+}
+
+.alert-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.alert-message {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.alert-time {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Sentiment Chart  
+const sentimentCtx = document.getElementById('sentimentChart').getContext('2d');
+const sentimentChart = new Chart(sentimentCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Positive', 'Neutral', 'Negative'],
+        datasets: [{
+            data: [{{ data.sentiment_distribution.positive }}, {{ data.sentiment_distribution.neutral }}, {{ data.sentiment_distribution.negative }}],
+            backgroundColor: ['#28a745', '#6c757d', '#dc3545'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+// Timeline Chart
+const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+const timelineChart = new Chart(timelineCtx, {
+    type: 'line',
+    data: {
+        labels: ['6AM', '9AM', '12PM', '3PM', '6PM', '9PM', '12AM'],
+        datasets: [{
+            label: 'Comment Volume',
+            data: [120, 190, 300, 500, 420, 380, 180],
+            borderColor: '#3498db',
+            backgroundColor: 'rgba(52, 152, 219, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: 'Positive Sentiment',
+            data: [85, 88, 92, 89, 91, 87, 82],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0,0,0,0.05)'
+                }
+            }
+        }
+    }
+});
+
+// Content Category Chart
+const contentCtx = document.getElementById('contentCategoryChart').getContext('2d');
+const contentChart = new Chart(contentCtx, {
+    type: 'bar',
+    data: {
+        labels: ['Appreciation', 'Questions', 'Feedback', 'Suggestions', 'Technical', 'Personal'],
+        datasets: [{
+            data: [420, 350, 320, 280, 240, 180],
+            backgroundColor: [
+                '#28a745', '#17a2b8', '#ffc107', '#fd7e14', '#6f42c1', '#e83e8c'
+            ],
+            borderRadius: 4
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0,0,0,0.05)'
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    }
+});
+
+// Animate health score on load
+document.addEventListener('DOMContentLoaded', function() {
+    const circle = document.querySelector('.health-score-circle circle:last-child');
+    const score = {{ data.overall_health_score }};
+    const circumference = 2 * Math.PI * 70;
+    const offset = circumference - (score / 100) * circumference;
+    
+    setTimeout(() => {
+        circle.style.strokeDashoffset = offset;
+    }, 500);
+});
+</script>
+{% endblock %}

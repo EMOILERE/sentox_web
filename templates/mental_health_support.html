@@ -1,0 +1,1306 @@
+{% extends "base.html" %}
+
+{% block title %}Mental Health & Crisis Support - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="mental-health-header py-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <h1 class="h2 mb-2">
+                <i class="fas fa-heart me-3"></i>
+                Mental Health & Crisis Support Center
+            </h1>
+            <p class="text-muted mb-0">
+                Comprehensive mental health resources, crisis intervention, and wellness support for users affected by online harassment and cyberbullying
+            </p>
+        </div>
+        <div class="col-lg-4 text-end">
+            <div class="crisis-hotline">
+                <div class="crisis-number">
+                    <i class="fas fa-phone"></i>
+                    <span>Crisis Line: 988</span>
+                </div>
+                <button class="btn btn-danger btn-sm ms-2" onclick="activateCrisisMode()">
+                    <i class="fas fa-exclamation-triangle"></i> Crisis Alert
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Crisis Detection Dashboard -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="support-metric-card crisis-interventions">
+            <div class="metric-icon">
+                <i class="fas fa-life-ring"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">23</div>
+                <div class="metric-label">Crisis Interventions Today</div>
+                <div class="metric-change">5 active sessions</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="support-metric-card wellness-checks">
+            <div class="metric-icon">
+                <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">147</div>
+                <div class="metric-label">Wellness Checks</div>
+                <div class="metric-change">+12% this week</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="support-metric-card support-connections">
+            <div class="metric-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">89</div>
+                <div class="metric-label">Support Connections</div>
+                <div class="metric-change">42 peer matches</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="support-metric-card recovery-rate">
+            <div class="metric-icon">
+                <i class="fas fa-chart-line"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">91.3%</div>
+                <div class="metric-label">Recovery Success Rate</div>
+                <div class="metric-change">+3.2% improvement</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- AI Crisis Detection -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-brain me-2"></i>AI Crisis Detection & Early Warning
+                </h5>
+                <div class="detection-controls">
+                    <span class="risk-level high">5 High Risk Users</span>
+                    <button class="btn btn-sm btn-outline-danger ms-2">
+                        <i class="fas fa-bell"></i> Alert Counselors
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="crisis-alerts">
+                    <!-- Critical Alert -->
+                    <div class="crisis-alert severity-critical">
+                        <div class="alert-indicator">
+                            <div class="severity-badge critical">CRITICAL</div>
+                            <div class="alert-type">Suicide Risk Detected</div>
+                        </div>
+                        <div class="alert-details">
+                            <div class="alert-title">High-risk language patterns detected: @vulnerable_user_18</div>
+                            <div class="alert-description">
+                                AI analysis detected multiple suicide ideation indicators in recent posts and messages. 
+                                User showing signs of severe depression and hopelessness following cyberbullying incident.
+                            </div>
+                            <div class="risk-indicators">
+                                <span class="risk-tag critical">Suicide ideation</span>
+                                <span class="risk-tag high">Social isolation</span>
+                                <span class="risk-tag high">Hopelessness</span>
+                                <span class="risk-tag medium">Recent trauma</span>
+                            </div>
+                            <div class="alert-meta">
+                                <span class="meta-item">Risk Score: 94/100</span>
+                                <span class="meta-item">Last Activity: 12 minutes ago</span>
+                                <span class="meta-item">Incident Trigger: Harassment campaign</span>
+                            </div>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn btn-sm btn-danger" onclick="activateEmergencyResponse('@vulnerable_user_18')">
+                                <i class="fas fa-ambulance"></i> Emergency Response
+                            </button>
+                            <button class="btn btn-sm btn-warning" onclick="connectCrisisCounselor('@vulnerable_user_18')">
+                                <i class="fas fa-user-md"></i> Crisis Counselor
+                            </button>
+                            <button class="btn btn-sm btn-info" onclick="notifyEmergencyContacts('@vulnerable_user_18')">
+                                <i class="fas fa-phone"></i> Notify Contacts
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- High Risk Alert -->
+                    <div class="crisis-alert severity-high">
+                        <div class="alert-indicator">
+                            <div class="severity-badge high">HIGH</div>
+                            <div class="alert-type">Self-Harm Indicators</div>
+                        </div>
+                        <div class="alert-details">
+                            <div class="alert-title">Self-harm language detected: @teen_creator_22</div>
+                            <div class="alert-description">
+                                User expressing self-harm thoughts and engaging with harmful content after receiving 
+                                coordinated harassment about their appearance.
+                            </div>
+                            <div class="risk-indicators">
+                                <span class="risk-tag high">Self-harm ideation</span>
+                                <span class="risk-tag medium">Body dysmorphia</span>
+                                <span class="risk-tag medium">Emotional distress</span>
+                            </div>
+                            <div class="alert-meta">
+                                <span class="meta-item">Risk Score: 78/100</span>
+                                <span class="meta-item">Last Activity: 1 hour ago</span>
+                                <span class="meta-item">Incident Trigger: Appearance harassment</span>
+                            </div>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn btn-sm btn-warning" onclick="offerSupportResources('@teen_creator_22')">
+                                <i class="fas fa-heart"></i> Offer Support
+                            </button>
+                            <button class="btn btn-sm btn-info" onclick="connectPeerSupport('@teen_creator_22')">
+                                <i class="fas fa-users"></i> Peer Support
+                            </button>
+                            <button class="btn btn-sm btn-secondary" onclick="scheduleWellnessCheck('@teen_creator_22')">
+                                <i class="fas fa-calendar"></i> Follow-up
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Medium Risk Alert -->
+                    <div class="crisis-alert severity-medium">
+                        <div class="alert-indicator">
+                            <div class="severity-badge medium">MEDIUM</div>
+                            <div class="alert-type">Emotional Distress</div>
+                        </div>
+                        <div class="alert-details">
+                            <div class="alert-title">Increasing anxiety markers: @content_creator_45</div>
+                            <div class="alert-description">
+                                Pattern analysis shows escalating anxiety and stress levels following targeted harassment campaign.
+                            </div>
+                            <div class="risk-indicators">
+                                <span class="risk-tag medium">Anxiety symptoms</span>
+                                <span class="risk-tag low">Sleep disruption</span>
+                                <span class="risk-tag medium">Social withdrawal</span>
+                            </div>
+                            <div class="alert-meta">
+                                <span class="meta-item">Risk Score: 62/100</span>
+                                <span class="meta-item">Last Activity: 3 hours ago</span>
+                                <span class="meta-item">Incident Trigger: Persistent harassment</span>
+                            </div>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn btn-sm btn-info" onclick="sendWellnessResources('@content_creator_45')">
+                                <i class="fas fa-leaf"></i> Wellness Resources
+                            </button>
+                            <button class="btn btn-sm btn-success" onclick="inviteCommunitySupport('@content_creator_45')">
+                                <i class="fas fa-hands-helping"></i> Community Support
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-phone-alt me-2"></i>Emergency Resources
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="emergency-resource">
+                    <div class="resource-header">
+                        <i class="fas fa-ambulance text-danger"></i>
+                        <h6>National Suicide Prevention</h6>
+                    </div>
+                    <p class="resource-number">988</p>
+                    <p class="small text-muted">24/7 crisis support and suicide prevention</p>
+                    <button class="btn btn-danger btn-sm w-100" onclick="callEmergencyLine('988')">
+                        <i class="fas fa-phone"></i> Call Now
+                    </button>
+                </div>
+                
+                <div class="emergency-resource">
+                    <div class="resource-header">
+                        <i class="fas fa-comments text-primary"></i>
+                        <h6>Crisis Text Line</h6>
+                    </div>
+                    <p class="resource-number">Text HOME to 741741</p>
+                    <p class="small text-muted">Anonymous crisis support via text</p>
+                    <button class="btn btn-primary btn-sm w-100" onclick="openCrisisChat()">
+                        <i class="fas fa-comment"></i> Start Chat
+                    </button>
+                </div>
+                
+                <div class="emergency-resource">
+                    <div class="resource-header">
+                        <i class="fas fa-globe text-success"></i>
+                        <h6>Online Crisis Support</h6>
+                    </div>
+                    <p class="resource-number">24/7 Web Chat</p>
+                    <p class="small text-muted">Immediate professional counseling</p>
+                    <button class="btn btn-success btn-sm w-100" onclick="startOnlineCounseling()">
+                        <i class="fas fa-user-md"></i> Connect Now
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-chart-pulse me-2"></i>Wellness Trends
+                </h6>
+            </div>
+            <div class="card-body">
+                <canvas id="wellnessTrendsChart" height="200"></canvas>
+                <div class="trend-summary mt-3">
+                    <div class="trend-item positive">
+                        <i class="fas fa-arrow-up"></i>
+                        <span>Recovery rates improving by 8% this month</span>
+                    </div>
+                    <div class="trend-item negative">
+                        <i class="fas fa-arrow-down"></i>
+                        <span>Crisis interventions needed increased 12%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Support Services -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-hands-helping me-2"></i>Comprehensive Support Services
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="support-service">
+                            <div class="service-icon bg-primary">
+                                <i class="fas fa-user-md"></i>
+                            </div>
+                            <div class="service-content">
+                                <h6>Professional Counseling</h6>
+                                <p class="text-muted small">Licensed therapists specializing in online trauma and cyberbullying recovery</p>
+                                <div class="service-stats">
+                                    <span class="badge bg-primary">47 active sessions</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-primary" onclick="bookCounseling()">
+                                    <i class="fas fa-calendar"></i> Book Session
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="support-service">
+                            <div class="service-icon bg-success">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <div class="service-content">
+                                <h6>Peer Support Groups</h6>
+                                <p class="text-muted small">Connect with others who have experienced similar online harassment</p>
+                                <div class="service-stats">
+                                    <span class="badge bg-success">12 active groups</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-success" onclick="joinSupportGroup()">
+                                    <i class="fas fa-user-friends"></i> Join Group
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="support-service">
+                            <div class="service-icon bg-info">
+                                <i class="fas fa-meditation"></i>
+                            </div>
+                            <div class="service-content">
+                                <h6>Mindfulness & Wellness</h6>
+                                <p class="text-muted small">Guided meditation, stress reduction, and emotional regulation techniques</p>
+                                <div class="service-stats">
+                                    <span class="badge bg-info">156 resources</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-info" onclick="accessMindfulness()">
+                                    <i class="fas fa-leaf"></i> Start Practice
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="support-service">
+                            <div class="service-icon bg-warning">
+                                <i class="fas fa-shield-heart"></i>
+                            </div>
+                            <div class="service-content">
+                                <h6>Safety Planning</h6>
+                                <p class="text-muted small">Personalized safety plans and coping strategies for crisis situations</p>
+                                <div class="service-stats">
+                                    <span class="badge bg-warning">89 active plans</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-warning" onclick="createSafetyPlan()">
+                                    <i class="fas fa-clipboard-check"></i> Create Plan
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recovery Tracking -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>Recovery Progress Tracking
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="recovery-dashboard">
+                    <div class="progress-overview">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="progress-metric">
+                                    <div class="metric-value">73%</div>
+                                    <div class="metric-label">Overall Wellness</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill good" style="width: 73%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="progress-metric">
+                                    <div class="metric-value">45%</div>
+                                    <div class="metric-label">Stress Level</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill moderate" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="progress-metric">
+                                    <div class="metric-value">89%</div>
+                                    <div class="metric-label">Support Engagement</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill excellent" style="width: 89%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="progress-metric">
+                                    <div class="metric-value">67%</div>
+                                    <div class="metric-label">Coping Skills</div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill good" style="width: 67%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="recovery-timeline mt-4">
+                        <h6>Recovery Milestones</h6>
+                        <div class="timeline">
+                            <div class="timeline-item completed">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <div class="milestone-title">Crisis Stabilization</div>
+                                    <div class="milestone-date">Completed 2 weeks ago</div>
+                                    <div class="milestone-desc">Successfully connected to crisis counselor and established safety plan</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item completed">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <div class="milestone-title">Support Network Established</div>
+                                    <div class="milestone-date">Completed 1 week ago</div>
+                                    <div class="milestone-desc">Joined peer support group and began regular counseling sessions</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item active">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <div class="milestone-title">Coping Skills Development</div>
+                                    <div class="milestone-date">In Progress</div>
+                                    <div class="milestone-desc">Learning stress management and emotional regulation techniques</div>
+                                </div>
+                            </div>
+                            
+                            <div class="timeline-item">
+                                <div class="timeline-marker"></div>
+                                <div class="timeline-content">
+                                    <div class="milestone-title">Resilience Building</div>
+                                    <div class="milestone-date">Upcoming</div>
+                                    <div class="milestone-desc">Focus on building long-term resilience and prevention strategies</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-calendar-check me-2"></i>Wellness Activities
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="wellness-activities">
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-phone text-primary"></i>
+                        </div>
+                        <div class="activity-info">
+                            <div class="activity-title">Counseling Session</div>
+                            <div class="activity-time">Today, 3:00 PM</div>
+                        </div>
+                        <div class="activity-status">
+                            <i class="fas fa-check-circle text-success"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-users text-success"></i>
+                        </div>
+                        <div class="activity-info">
+                            <div class="activity-title">Support Group</div>
+                            <div class="activity-time">Tomorrow, 7:00 PM</div>
+                        </div>
+                        <div class="activity-status">
+                            <i class="fas fa-calendar text-warning"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-meditation text-info"></i>
+                        </div>
+                        <div class="activity-info">
+                            <div class="activity-title">Mindfulness Practice</div>
+                            <div class="activity-time">Daily, 8:00 AM</div>
+                        </div>
+                        <div class="activity-status">
+                            <i class="fas fa-clock text-secondary"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <div class="activity-icon">
+                            <i class="fas fa-clipboard-check text-warning"></i>
+                        </div>
+                        <div class="activity-info">
+                            <div class="activity-title">Wellness Check-in</div>
+                            <div class="activity-time">Weekly, Fridays</div>
+                        </div>
+                        <div class="activity-status">
+                            <i class="fas fa-bell text-info"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-3">
+                    <button class="btn btn-primary btn-sm w-100 mb-2">
+                        <i class="fas fa-plus"></i> Schedule Activity
+                    </button>
+                    <button class="btn btn-outline-secondary btn-sm w-100">
+                        <i class="fas fa-calendar"></i> View Full Calendar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Educational Resources -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-graduation-cap me-2"></i>Mental Health Education & Resources
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="resource-categories">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="resource-category">
+                                <div class="category-header">
+                                    <i class="fas fa-brain text-primary"></i>
+                                    <h6>Understanding Mental Health</h6>
+                                </div>
+                                <ul class="resource-list">
+                                    <li><a href="#" onclick="openResource('depression-guide')">Understanding Depression and Anxiety</a></li>
+                                    <li><a href="#" onclick="openResource('trauma-guide')">Online Trauma and Recovery</a></li>
+                                    <li><a href="#" onclick="openResource('suicide-prevention')">Suicide Prevention and Warning Signs</a></li>
+                                    <li><a href="#" onclick="openResource('self-harm')">Self-Harm Awareness and Alternatives</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="resource-category">
+                                <div class="category-header">
+                                    <i class="fas fa-tools text-success"></i>
+                                    <h6>Coping Strategies</h6>
+                                </div>
+                                <ul class="resource-list">
+                                    <li><a href="#" onclick="openResource('breathing-exercises')">Breathing and Relaxation Techniques</a></li>
+                                    <li><a href="#" onclick="openResource('grounding-techniques')">Grounding Exercises for Anxiety</a></li>
+                                    <li><a href="#" onclick="openResource('emotional-regulation')">Emotional Regulation Skills</a></li>
+                                    <li><a href="#" onclick="openResource('distress-tolerance')">Distress Tolerance Strategies</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6 mb-3">
+                            <div class="resource-category">
+                                <div class="category-header">
+                                    <i class="fas fa-shield-alt text-warning"></i>
+                                    <h6>Online Safety & Resilience</h6>
+                                </div>
+                                <ul class="resource-list">
+                                    <li><a href="#" onclick="openResource('digital-wellness')">Digital Wellness and Boundaries</a></li>
+                                    <li><a href="#" onclick="openResource('cyberbullying-recovery')">Recovering from Cyberbullying</a></li>
+                                    <li><a href="#" onclick="openResource('online-privacy')">Protecting Your Online Privacy</a></li>
+                                    <li><a href="#" onclick="openResource('building-resilience')">Building Digital Resilience</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.mental-health-header {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(52, 152, 219, 0.1) 100%);
+    border-radius: 10px;
+    margin: -1rem -15px 0 -15px;
+    padding: 2rem 15px;
+}
+
+.crisis-hotline {
+    display: flex;
+    align-items: center;
+}
+
+.crisis-number {
+    display: flex;
+    align-items: center;
+    background: #dc3545;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+.crisis-number i {
+    margin-right: 0.5rem;
+}
+
+.support-metric-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.support-metric-card:hover {
+    transform: translateY(-3px);
+}
+
+.support-metric-card.crisis-interventions {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.support-metric-card.wellness-checks {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.support-metric-card.support-connections {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+}
+
+.support-metric-card.recovery-rate {
+    background: linear-gradient(135deg, #6f42c1, #59359a);
+}
+
+.crisis-alerts {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.crisis-alert {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.crisis-alert:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.crisis-alert.severity-critical {
+    border-left: 4px solid #dc3545;
+    background: rgba(220, 53, 69, 0.05);
+}
+
+.crisis-alert.severity-high {
+    border-left: 4px solid #fd7e14;
+    background: rgba(253, 126, 20, 0.05);
+}
+
+.crisis-alert.severity-medium {
+    border-left: 4px solid #ffc107;
+    background: rgba(255, 193, 7, 0.05);
+}
+
+.alert-indicator {
+    padding: 1rem 1.5rem 0;
+    text-align: center;
+    margin-right: 1rem;
+}
+
+.severity-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.severity-badge.critical {
+    background: #dc3545;
+    animation: pulse 2s infinite;
+}
+
+.severity-badge.high {
+    background: #fd7e14;
+}
+
+.severity-badge.medium {
+    background: #ffc107;
+    color: #212529;
+}
+
+.alert-type {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.alert-details {
+    padding: 1rem 1.5rem;
+}
+
+.alert-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+}
+
+.alert-description {
+    color: #6c757d;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.risk-indicators {
+    margin-bottom: 1rem;
+}
+
+.risk-tag {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
+.risk-tag.critical {
+    background: #dc3545;
+}
+
+.risk-tag.high {
+    background: #fd7e14;
+}
+
+.risk-tag.medium {
+    background: #ffc107;
+    color: #212529;
+}
+
+.risk-tag.low {
+    background: #6c757d;
+}
+
+.alert-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.meta-item {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+.alert-actions {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid #e9ecef;
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.emergency-resource {
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.emergency-resource:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.resource-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.resource-header i {
+    font-size: 1.5rem;
+    margin-right: 0.5rem;
+}
+
+.resource-header h6 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+.resource-number {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.trend-summary {
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+}
+
+.trend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    font-size: 0.9rem;
+}
+
+.trend-item.positive {
+    color: #28a745;
+}
+
+.trend-item.negative {
+    color: #dc3545;
+}
+
+.trend-item i {
+    margin-right: 0.5rem;
+}
+
+.support-service {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.support-service:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.service-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.service-content h6 {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+}
+
+.service-stats {
+    margin: 1rem 0;
+}
+
+.progress-overview {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.progress-metric {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.progress-metric .metric-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.progress-metric .metric-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.75rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.progress-fill.excellent {
+    background: #28a745;
+}
+
+.progress-fill.good {
+    background: #17a2b8;
+}
+
+.progress-fill.moderate {
+    background: #ffc107;
+}
+
+.progress-fill.poor {
+    background: #dc3545;
+}
+
+.recovery-timeline {
+    margin-top: 2rem;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -27px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #dee2e6;
+    border: 3px solid white;
+    box-shadow: 0 0 0 3px #dee2e6;
+}
+
+.timeline-item.completed .timeline-marker {
+    background: #28a745;
+    box-shadow: 0 0 0 3px #28a745;
+}
+
+.timeline-item.active .timeline-marker {
+    background: #17a2b8;
+    box-shadow: 0 0 0 3px #17a2b8;
+    animation: pulse 2s infinite;
+}
+
+.milestone-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.milestone-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-bottom: 0.5rem;
+}
+
+.milestone-desc {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.wellness-activities {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.activity-item:hover {
+    background: #e9ecef;
+}
+
+.activity-icon {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.activity-info {
+    flex-grow: 1;
+}
+
+.activity-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.activity-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.activity-status {
+    font-size: 1.2rem;
+}
+
+.resource-categories {
+    padding: 1rem 0;
+}
+
+.resource-category {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.category-header i {
+    font-size: 1.5rem;
+    margin-right: 0.75rem;
+}
+
+.category-header h6 {
+    margin: 0;
+    color: #2c3e50;
+}
+
+.resource-list {
+    list-style: none;
+    padding: 0;
+}
+
+.resource-list li {
+    margin-bottom: 0.75rem;
+}
+
+.resource-list a {
+    color: #6c757d;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.resource-list a:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Wellness Trends Chart
+const wellnessCtx = document.getElementById('wellnessTrendsChart').getContext('2d');
+const wellnessChart = new Chart(wellnessCtx, {
+    type: 'line',
+    data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+        datasets: [{
+            label: 'Recovery Rate',
+            data: [78, 82, 79, 85, 88, 91, 89],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: 'Crisis Interventions',
+            data: [45, 38, 42, 35, 28, 32, 25],
+            borderColor: '#dc3545',
+            backgroundColor: 'rgba(220, 53, 69, 0.1)',
+            tension: 0.4,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0,0,0,0.05)'
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    }
+});
+
+// Crisis intervention functions
+function activateCrisisMode() {
+    if (confirm('Activate Crisis Mode? This will immediately alert all crisis counselors and emergency contacts.')) {
+        console.log('Crisis mode activated');
+        alert('CRISIS MODE ACTIVATED\n\n• All crisis counselors notified\n• Emergency response team alerted\n• Elevated monitoring in effect');
+        
+        // Update UI
+        document.querySelector('.crisis-number').style.background = '#dc3545';
+        document.querySelector('.crisis-number').innerHTML = '<i class="fas fa-exclamation-triangle"></i><span>CRISIS MODE ACTIVE</span>';
+    }
+}
+
+function activateEmergencyResponse(userId) {
+    console.log('Activating emergency response for:', userId);
+    if (confirm(`Activate emergency response for ${userId}? This will contact local emergency services.`)) {
+        alert('Emergency Response Activated:\n\n• Local crisis team dispatched\n• Emergency services contacted\n• User welfare check initiated\n• Crisis counselor assigned');
+    }
+}
+
+function connectCrisisCounselor(userId) {
+    console.log('Connecting crisis counselor for:', userId);
+    alert(`Crisis counselor connecting to ${userId}...\n\nDr. Sarah Martinez (Crisis Specialist) will contact the user within 5 minutes.`);
+}
+
+function notifyEmergencyContacts(userId) {
+    console.log('Notifying emergency contacts for:', userId);
+    alert(`Emergency contacts notified for ${userId}:\n\n• Family members alerted\n• Close friends contacted\n• Support network activated`);
+}
+
+function offerSupportResources(userId) {
+    console.log('Offering support resources to:', userId);
+    alert(`Support resources sent to ${userId}:\n\n• Crisis hotline numbers\n• Mental health resources\n• Local support services\n• Safety planning tools`);
+}
+
+function connectPeerSupport(userId) {
+    console.log('Connecting peer support for:', userId);
+    alert(`Peer support activated for ${userId}:\n\n• Matched with peer mentor\n• Support group invitation sent\n• Community resources shared`);
+}
+
+function scheduleWellnessCheck(userId) {
+    console.log('Scheduling wellness check for:', userId);
+    alert(`Wellness check scheduled for ${userId}:\n\n• Follow-up in 24 hours\n• Weekly check-ins scheduled\n• Progress monitoring activated`);
+}
+
+function sendWellnessResources(userId) {
+    console.log('Sending wellness resources to:', userId);
+    alert(`Wellness resources sent to ${userId}:\n\n• Mindfulness exercises\n• Stress management tools\n• Self-care activities\n• Coping strategies`);
+}
+
+function inviteCommunitySupport(userId) {
+    console.log('Inviting community support for:', userId);
+    alert(`Community support invitation sent to ${userId}:\n\n• Supportive community members notified\n• Positive engagement campaign started\n• Encouragement messages coordinated`);
+}
+
+// Emergency resource functions
+function callEmergencyLine(number) {
+    console.log(`Calling emergency line: ${number}`);
+    alert(`Connecting to ${number}...\n\nYou will be connected to a trained crisis counselor.\nHelp is available 24/7.`);
+}
+
+function openCrisisChat() {
+    console.log('Opening crisis chat');
+    alert('Opening crisis text support...\n\nText HOME to 741741 to connect with a crisis counselor.\nConversations are confidential and free.');
+}
+
+function startOnlineCounseling() {
+    console.log('Starting online counseling');
+    alert('Connecting to online counseling...\n\nA licensed therapist will be with you shortly.\nAll sessions are confidential.');
+}
+
+// Support service functions
+function bookCounseling() {
+    console.log('Booking counseling session');
+    alert('Counseling Session Booking:\n\nNext available appointment:\nTomorrow at 2:00 PM with Dr. Jennifer Smith\n\nWould you like to confirm this appointment?');
+}
+
+function joinSupportGroup() {
+    console.log('Joining support group');
+    alert('Support Group Information:\n\n"Healing Together" group meets:\n• Tuesdays at 7:00 PM\n• Virtual and in-person options\n• Led by licensed therapist\n\nWould you like to join?');
+}
+
+function accessMindfulness() {
+    console.log('Accessing mindfulness resources');
+    alert('Mindfulness Resources Available:\n\n• Guided meditation (5-30 min)\n• Breathing exercises\n• Progressive muscle relaxation\n• Mindful movement practices\n\nStarting with a 5-minute breathing exercise...');
+}
+
+function createSafetyPlan() {
+    console.log('Creating safety plan');
+    alert('Safety Plan Creation:\n\n1. Warning signs identification\n2. Coping strategies list\n3. Support contacts\n4. Emergency resources\n5. Environmental safety\n\nWould you like to begin creating your personalized safety plan?');
+}
+
+function openResource(resourceType) {
+    console.log('Opening resource:', resourceType);
+    
+    const resources = {
+        'depression-guide': 'Understanding Depression and Anxiety: A comprehensive guide to recognizing symptoms and finding help.',
+        'trauma-guide': 'Online Trauma and Recovery: Healing from cyberbullying and digital harassment.',
+        'suicide-prevention': 'Suicide Prevention: Warning signs, risk factors, and how to help.',
+        'self-harm': 'Self-Harm Awareness: Understanding self-injury and healthy alternatives.',
+        'breathing-exercises': 'Breathing and Relaxation: Techniques for managing anxiety and stress.',
+        'grounding-techniques': 'Grounding Exercises: Strategies for managing panic and overwhelming emotions.',
+        'emotional-regulation': 'Emotional Regulation Skills: Tools for managing intense emotions.',
+        'distress-tolerance': 'Distress Tolerance: Coping with crisis situations without making them worse.',
+        'digital-wellness': 'Digital Wellness: Creating healthy boundaries with technology.',
+        'cyberbullying-recovery': 'Recovering from Cyberbullying: A step-by-step healing guide.',
+        'online-privacy': 'Protecting Your Online Privacy: Security and safety measures.',
+        'building-resilience': 'Building Digital Resilience: Strengthening your mental health online.'
+    };
+    
+    alert(`Opening Resource: ${resources[resourceType] || 'Educational content about mental health and wellness.'}`);
+}
+
+// Real-time updates
+setInterval(() => {
+    // Update metrics with small random changes
+    document.querySelectorAll('.metric-number').forEach(metric => {
+        if (!metric.textContent.includes('%')) {
+            const current = parseInt(metric.textContent);
+            const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+            const newValue = Math.max(0, current + variation);
+            metric.textContent = newValue;
+        }
+    });
+    
+    // Update progress bars occasionally
+    if (Math.random() < 0.2) {
+        document.querySelectorAll('.progress-fill').forEach(bar => {
+            const currentWidth = parseInt(bar.style.width);
+            const variation = Math.floor(Math.random() * 6) - 3; // -3 to +3
+            const newWidth = Math.max(0, Math.min(100, currentWidth + variation));
+            bar.style.width = `${newWidth}%`;
+            
+            // Update corresponding metric value
+            const metricValue = bar.closest('.progress-metric').querySelector('.metric-value');
+            metricValue.textContent = `${newWidth}%`;
+        });
+    }
+}, 25000); // Every 25 seconds
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Mental Health & Crisis Support Center initialized');
+});
+</script>
+{% endblock %}

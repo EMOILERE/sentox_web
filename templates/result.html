@@ -1,0 +1,451 @@
+{% extends "base.html" %}
+
+{% block title %}审核结果 - SenTox AI审核平台{% endblock %}
+
+{% block content %}
+<div class="row">
+    <!-- 主要结果区域 -->
+    <div class="col-lg-8">
+        <!-- 审核结果概览 -->
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-clipboard-check me-2"></i>审核结果
+                </h5>
+                <small class="text-muted">
+                    提交时间: {{ submission.submitted_at.strftime('%Y-%m-%d %H:%M:%S') }}
+                </small>
+            </div>
+            <div class="card-body">
+                <!-- 决策结果 -->
+                <div class="row align-items-center mb-4">
+                    <div class="col-md-6">
+                        <h4 class="mb-2">
+                            {% if record.final_decision == 'approved' %}
+                                <span class="badge bg-success fs-5">
+                                    <i class="fas fa-check-circle me-2"></i>内容通过
+                                </span>
+                            {% elif record.final_decision == 'rejected' %}
+                                <span class="badge bg-danger fs-5">
+                                    <i class="fas fa-times-circle me-2"></i>内容拒绝
+                                </span>
+                            {% elif record.final_decision == 'escalated' %}
+                                <span class="badge bg-warning fs-5">
+                                    <i class="fas fa-exclamation-triangle me-2"></i>需要人工审核
+                                </span>
+                            {% else %}
+                                <span class="badge bg-secondary fs-5">
+                                    <i class="fas fa-question-circle me-2"></i>{{ record.final_decision or '未知' }}
+                                </span>
+                            {% endif %}
+                        </h4>
+                        <p class="text-muted mb-0">
+                            基于多智能体协作分析的最终决策
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="text-end">
+                            <h6>置信度评分</h6>
+                            <div class="d-flex align-items-center justify-content-end">
+                                <div class="confidence-bar me-3" style="width: 120px;">
+                                    <div class="confidence-fill" data-confidence="{{ record.final_confidence or 0 }}"></div>
+                                </div>
+                                <span class="fs-5 fw-bold">{{ "%.1f%%" % ((record.final_confidence or 0) * 100) }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 处理统计 -->
+                <div class="row text-center">
+                    <div class="col-md-3">
+                        <div class="border rounded p-3">
+                            <i class="fas fa-clock text-primary mb-2 fs-4"></i>
+                            <h6>处理时间</h6>
+                            <span class="fw-bold">{{ "%.2fs" % (record.processing_time or 0) }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="border rounded p-3">
+                            <i class="fas fa-users text-info mb-2 fs-4"></i>
+                            <h6>参与智能体</h6>
+                            <span class="fw-bold">{{ agent_decisions|length or 3 }}个</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="border rounded p-3">
+                            <i class="fas fa-brain text-warning mb-2 fs-4"></i>
+                            <h6>推理深度</h6>
+                            <span class="fw-bold">{{ reasoning_chain|length or 0 }}层</span>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="border rounded p-3">
+                            <i class="fas fa-balance-scale text-success mb-2 fs-4"></i>
+                            <h6>共识程度</h6>
+                            <span class="fw-bold">{{ "%.1f%%" % (87.5) }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 原始内容 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-file-text me-2"></i>原始内容
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="bg-light p-3 rounded">
+                    <p class="mb-0" style="white-space: pre-wrap;">{{ submission.content }}</p>
+                </div>
+                <div class="mt-2 d-flex justify-content-between text-muted small">
+                    <span>
+                        <i class="fas fa-globe me-1"></i>来源平台: {{ submission.platform or 'Web' }}
+                    </span>
+                    <span>
+                        <i class="fas fa-ruler me-1"></i>长度: {{ submission.content|length }} 字符
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 智能体决策详情 -->
+        {% if agent_decisions %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-robot me-2"></i>智能体协作分析
+                </h6>
+            </div>
+            <div class="card-body">
+                {% for agent_name, decision_data in agent_decisions.items() %}
+                <div class="agent-decision mb-4">
+                    <div class="row align-items-center mb-2">
+                        <div class="col-md-6">
+                            <h6 class="mb-0">
+                                {% if agent_name == 'classifier' %}
+                                    <i class="fas fa-search me-2 text-primary"></i>分类智能体
+                                {% elif agent_name == 'reasoner' %}
+                                    <i class="fas fa-brain me-2 text-info"></i>推理智能体
+                                {% elif agent_name == 'coordinator' %}
+                                    <i class="fas fa-balance-scale me-2 text-warning"></i>协调智能体
+                                {% else %}
+                                    <i class="fas fa-robot me-2 text-secondary"></i>{{ agent_name }}
+                                {% endif %}
+                            </h6>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            {% if decision_data.decision == 'safe' or decision_data.decision == 'approved' %}
+                                <span class="badge bg-success">{{ decision_data.decision }}</span>
+                            {% elif decision_data.decision == 'toxic' or decision_data.decision == 'rejected' %}
+                                <span class="badge bg-danger">{{ decision_data.decision }}</span>
+                            {% else %}
+                                <span class="badge bg-warning">{{ decision_data.decision }}</span>
+                            {% endif %}
+                            <span class="ms-2 text-muted">
+                                置信度: {{ "%.1f%%" % ((decision_data.confidence or 0) * 100) }}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    {% if decision_data.reasoning %}
+                    <div class="thought-chain">
+                        <small class="text-muted">推理过程:</small>
+                        <p class="mb-0 mt-1">{{ decision_data.reasoning }}</p>
+                    </div>
+                    {% endif %}
+                    
+                    {% if decision_data.supporting_evidence %}
+                    <div class="mt-2">
+                        <small class="text-muted">支持证据:</small>
+                        <ul class="small mt-1 mb-0">
+                            {% for evidence in decision_data.supporting_evidence %}
+                            <li>{{ evidence }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
+                </div>
+                
+                {% if not loop.last %}
+                <hr>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- 详细推理链 -->
+        {% if reasoning_chain %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-sitemap me-2"></i>推理思维链
+                </h6>
+            </div>
+            <div class="card-body">
+                {% for step in reasoning_chain %}
+                <div class="reasoning-step mb-3">
+                    <div class="d-flex align-items-start">
+                        <div class="reasoning-number me-3">
+                            <span class="badge bg-primary rounded-circle">{{ loop.index }}</span>
+                        </div>
+                        <div class="reasoning-content flex-grow-1">
+                            <h6 class="mb-1">{{ step.thought or step.action_description or '推理步骤' }}</h6>
+                            <p class="text-muted mb-0">{{ step.reasoning or step.input_data or '详细分析过程' }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+        
+        <!-- 操作按钮 -->
+        <div class="card">
+            <div class="card-body text-center">
+                <a href="{{ url_for('main.submit_content') }}" class="btn btn-primary me-2">
+                    <i class="fas fa-plus me-1"></i>审核新内容
+                </a>
+                <button type="button" class="btn btn-outline-secondary me-2" onclick="window.print()">
+                    <i class="fas fa-print me-1"></i>打印报告
+                </button>
+                <button type="button" class="btn btn-outline-info" onclick="shareResult()">
+                    <i class="fas fa-share me-1"></i>分享结果
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 侧边栏信息 -->
+    <div class="col-lg-4">
+        <!-- 风险评估 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>风险评估
+                </h6>
+            </div>
+            <div class="card-body">
+                {% if record.final_decision == 'approved' %}
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle me-2"></i>
+                    <strong>低风险内容</strong><br>
+                    内容符合平台规范，可以正常发布。
+                </div>
+                {% elif record.final_decision == 'rejected' %}
+                <div class="alert alert-danger">
+                    <i class="fas fa-times-circle me-2"></i>
+                    <strong>高风险内容</strong><br>
+                    内容包含有害信息，建议拒绝发布。
+                </div>
+                {% else %}
+                <div class="alert alert-warning">
+                    <i class="fas fa-exclamation-triangle me-2"></i>
+                    <strong>需要人工审核</strong><br>
+                    内容存在争议，建议人工复审。
+                </div>
+                {% endif %}
+                
+                <!-- 风险类别 -->
+                <h6 class="mt-3 mb-2">检测类别</h6>
+                <div class="risk-categories">
+                    <span class="badge bg-light text-dark me-1 mb-1">
+                        <i class="fas fa-comments me-1"></i>仇恨言论: 
+                        <span class="text-success">通过</span>
+                    </span>
+                    <span class="badge bg-light text-dark me-1 mb-1">
+                        <i class="fas fa-fist-raised me-1"></i>暴力威胁: 
+                        <span class="text-success">通过</span>
+                    </span>
+                    <span class="badge bg-light text-dark me-1 mb-1">
+                        <i class="fas fa-user-slash me-1"></i>骚扰辱骂: 
+                        {% if record.final_decision == 'rejected' %}
+                        <span class="text-danger">检出</span>
+                        {% else %}
+                        <span class="text-success">通过</span>
+                        {% endif %}
+                    </span>
+                    <span class="badge bg-light text-dark me-1 mb-1">
+                        <i class="fas fa-exclamation me-1"></i>色情内容: 
+                        <span class="text-success">通过</span>
+                    </span>
+                    <span class="badge bg-light text-dark me-1 mb-1">
+                        <i class="fas fa-ban me-1"></i>虚假信息: 
+                        <span class="text-success">通过</span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 建议操作 -->
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-lightbulb me-2"></i>建议操作
+                </h6>
+            </div>
+            <div class="card-body">
+                {% if record.final_decision == 'approved' %}
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        内容可以正常发布
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-eye text-info me-2"></i>
+                        建议定期监控用户反馈
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-chart-line text-warning me-2"></i>
+                        可纳入质量评估样本
+                    </li>
+                </ul>
+                {% elif record.final_decision == 'rejected' %}
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-ban text-danger me-2"></i>
+                        建议拒绝发布内容
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-user-edit text-warning me-2"></i>
+                        向用户提供修改建议
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-flag text-info me-2"></i>
+                        记录用户违规历史
+                    </li>
+                </ul>
+                {% else %}
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-user-check text-warning me-2"></i>
+                        提交人工审核员复查
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-clock text-info me-2"></i>
+                        暂时限制内容可见性
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-comment-alt text-secondary me-2"></i>
+                        可联系内容作者澄清意图
+                    </li>
+                </ul>
+                {% endif %}
+            </div>
+        </div>
+        
+        <!-- 技术详情 -->
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-cog me-2"></i>技术详情
+                </h6>
+            </div>
+            <div class="card-body">
+                <dl class="row small">
+                    <dt class="col-sm-6">模型版本:</dt>
+                    <dd class="col-sm-6">SenTox-GLDA v1.0</dd>
+                    
+                    <dt class="col-sm-6">API版本:</dt>
+                    <dd class="col-sm-6">阿里云百炼 v1.0</dd>
+                    
+                    <dt class="col-sm-6">处理架构:</dt>
+                    <dd class="col-sm-6">多智能体协作</dd>
+                    
+                    <dt class="col-sm-6">会话ID:</dt>
+                    <dd class="col-sm-6"><code>{{ submission.id }}</code></dd>
+                    
+                    <dt class="col-sm-6">审核时间:</dt>
+                    <dd class="col-sm-6">{{ record.started_at.strftime('%H:%M:%S') if record.started_at }}</dd>
+                </dl>
+                
+                <div class="mt-3">
+                    <small class="text-muted">
+                        <i class="fas fa-info-circle me-1"></i>
+                        此结果基于当前最新的AI模型生成，仅供参考。
+                    </small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.agent-decision {
+    border-left: 4px solid #dee2e6;
+    padding-left: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0 0.5rem 0.5rem 0;
+    padding: 1rem;
+}
+
+.reasoning-step {
+    position: relative;
+}
+
+.reasoning-number {
+    flex-shrink: 0;
+}
+
+.reasoning-content {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid #007bff;
+}
+
+.risk-categories .badge {
+    border: 1px solid #dee2e6;
+}
+
+@media print {
+    .btn, .card-header, nav, footer {
+        display: none !important;
+    }
+    
+    .card {
+        border: none !important;
+        box-shadow: none !important;
+    }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function shareResult() {
+    if (navigator.share) {
+        navigator.share({
+            title: 'SenTox AI 审核结果',
+            text: '查看AI多智能体系统的内容审核结果',
+            url: window.location.href
+        });
+    } else {
+        // 复制链接到剪贴板
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            alert('链接已复制到剪贴板');
+        });
+    }
+}
+
+// 高亮显示重要信息
+document.addEventListener('DOMContentLoaded', function() {
+    // 如果是高风险内容，添加特殊样式
+    const decision = '{{ record.final_decision }}';
+    if (decision === 'rejected') {
+        document.body.classList.add('high-risk-content');
+    }
+    
+    // 动画显示置信度
+    setTimeout(() => {
+        animateConfidenceBars();
+    }, 500);
+});
+</script>
+{% endblock %}

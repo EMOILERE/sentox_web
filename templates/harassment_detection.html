@@ -1,0 +1,1323 @@
+{% extends "base.html" %}
+
+{% block title %}Coordinated Harassment Detection - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="harassment-header py-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <h1 class="h2 mb-2">
+                <i class="fas fa-network-wired me-3"></i>
+                Coordinated Harassment Detection System
+            </h1>
+            <p class="text-muted mb-0">
+                Advanced AI system for detecting, analyzing, and disrupting organized harassment campaigns, bot networks, and coordinated malicious activities
+            </p>
+        </div>
+        <div class="col-lg-4 text-end">
+            <div class="detection-status">
+                <div class="status-indicator scanning"></div>
+                <span class="status-text">Deep Scanning Active</span>
+                <button class="btn btn-outline-danger btn-sm ms-2">
+                    <i class="fas fa-exclamation-triangle"></i> Alert Mode
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detection Overview -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="detection-metric-card campaigns-detected">
+            <div class="metric-icon">
+                <i class="fas fa-users-slash"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">7</div>
+                <div class="metric-label">Active Campaigns</div>
+                <div class="metric-change">+2 detected today</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="detection-metric-card bot-networks">
+            <div class="metric-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">23</div>
+                <div class="metric-label">Bot Networks</div>
+                <div class="metric-change">147 accounts total</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="detection-metric-card coordinated-accounts">
+            <div class="metric-icon">
+                <i class="fas fa-link"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">89</div>
+                <div class="metric-label">Coordinated Accounts</div>
+                <div class="metric-change">34 newly linked</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="detection-metric-card disruption-rate">
+            <div class="metric-icon">
+                <i class="fas fa-shield-check"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">96.8%</div>
+                <div class="metric-label">Disruption Success</div>
+                <div class="metric-change">+1.2% this week</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Active Campaign Analysis -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-search me-2"></i>Active Harassment Campaigns
+                </h5>
+                <div class="campaign-controls">
+                    <select class="form-select form-select-sm">
+                        <option>All Campaigns</option>
+                        <option>High Priority</option>
+                        <option>Bot Networks</option>
+                        <option>Coordinated Attacks</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="campaign-list">
+                    <!-- High Priority Campaign -->
+                    <div class="campaign-item priority-critical">
+                        <div class="campaign-header">
+                            <div class="campaign-indicator">
+                                <div class="priority-badge critical">CRITICAL</div>
+                                <div class="campaign-type">Coordinated Bot Attack</div>
+                            </div>
+                            <div class="campaign-info">
+                                <div class="campaign-title">Operation "Cancel Creator" targeting @young_influencer_23</div>
+                                <div class="campaign-meta">
+                                    <span class="meta-item">Started: 3 hours ago</span>
+                                    <span class="meta-item">Participants: 47 accounts</span>
+                                    <span class="meta-item">Platforms: Instagram, TikTok, Twitter</span>
+                                </div>
+                            </div>
+                            <div class="campaign-actions">
+                                <button class="btn btn-sm btn-danger">
+                                    <i class="fas fa-ban"></i> Disrupt All
+                                </button>
+                                <button class="btn btn-sm btn-warning">
+                                    <i class="fas fa-eye"></i> Monitor
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="campaign-details">
+                            <div class="network-analysis">
+                                <h6>Network Analysis</h6>
+                                <div class="network-stats">
+                                    <div class="stat-item">
+                                        <span class="stat-label">Bot Accounts:</span>
+                                        <span class="stat-value text-danger">32 (68%)</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Sockpuppets:</span>
+                                        <span class="stat-value text-warning">12 (26%)</span>
+                                    </div>
+                                    <div class="stat-item">
+                                        <span class="stat-label">Real Accounts:</span>
+                                        <span class="stat-value text-info">3 (6%)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="attack-pattern">
+                                <h6>Attack Pattern</h6>
+                                <div class="pattern-timeline">
+                                    <div class="timeline-item">
+                                        <div class="timeline-time">15:30</div>
+                                        <div class="timeline-event">Initial trigger: Controversial post shared</div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-time">15:45</div>
+                                        <div class="timeline-event">Bot network activation detected</div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-time">16:00</div>
+                                        <div class="timeline-event">Coordinated negative comments begin</div>
+                                    </div>
+                                    <div class="timeline-item">
+                                        <div class="timeline-time">16:30</div>
+                                        <div class="timeline-event">Cross-platform spread initiated</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="coordination-indicators">
+                                <h6>Coordination Indicators</h6>
+                                <div class="indicator-grid">
+                                    <div class="indicator-item high">
+                                        <i class="fas fa-clock"></i>
+                                        <span>Synchronized Timing</span>
+                                        <div class="confidence-score">94%</div>
+                                    </div>
+                                    <div class="indicator-item high">
+                                        <i class="fas fa-comments"></i>
+                                        <span>Similar Language Patterns</span>
+                                        <div class="confidence-score">89%</div>
+                                    </div>
+                                    <div class="indicator-item medium">
+                                        <i class="fas fa-share"></i>
+                                        <span>Content Amplification</span>
+                                        <div class="confidence-score">76%</div>
+                                    </div>
+                                    <div class="indicator-item high">
+                                        <i class="fas fa-network-wired"></i>
+                                        <span>Network Connectivity</span>
+                                        <div class="confidence-score">92%</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Medium Priority Campaign -->
+                    <div class="campaign-item priority-high">
+                        <div class="campaign-header">
+                            <div class="campaign-indicator">
+                                <div class="priority-badge high">HIGH</div>
+                                <div class="campaign-type">Sockpuppet Network</div>
+                            </div>
+                            <div class="campaign-info">
+                                <div class="campaign-title">Multi-account harassment of @content_creator_pro</div>
+                                <div class="campaign-meta">
+                                    <span class="meta-item">Started: 2 days ago</span>
+                                    <span class="meta-item">Participants: 23 accounts</span>
+                                    <span class="meta-item">Platforms: YouTube, Reddit</span>
+                                </div>
+                            </div>
+                            <div class="campaign-actions">
+                                <button class="btn btn-sm btn-warning">
+                                    <i class="fas fa-flag"></i> Report All
+                                </button>
+                                <button class="btn btn-sm btn-info">
+                                    <i class="fas fa-search"></i> Investigate
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Emerging Campaign -->
+                    <div class="campaign-item priority-medium">
+                        <div class="campaign-header">
+                            <div class="campaign-indicator">
+                                <div class="priority-badge medium">MEDIUM</div>
+                                <div class="campaign-type">Emerging Pattern</div>
+                            </div>
+                            <div class="campaign-info">
+                                <div class="campaign-title">Potential brigading formation against @new_creator_99</div>
+                                <div class="campaign-meta">
+                                    <span class="meta-item">Detected: 30 minutes ago</span>
+                                    <span class="meta-item">Participants: 12 accounts</span>
+                                    <span class="meta-item">Platforms: Twitter</span>
+                                </div>
+                            </div>
+                            <div class="campaign-actions">
+                                <button class="btn btn-sm btn-success">
+                                    <i class="fas fa-shield-alt"></i> Preventive Action
+                                </button>
+                                <button class="btn btn-sm btn-secondary">
+                                    <i class="fas fa-clock"></i> Monitor
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-brain me-2"></i>AI Detection Algorithms
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="algorithm-status">
+                    <div class="algorithm-item">
+                        <div class="algorithm-icon bg-primary">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <div class="algorithm-info">
+                            <div class="algorithm-name">Network Graph Analysis</div>
+                            <div class="algorithm-performance">98.3% accuracy</div>
+                        </div>
+                        <div class="algorithm-indicator active"></div>
+                    </div>
+                    
+                    <div class="algorithm-item">
+                        <div class="algorithm-icon bg-success">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="algorithm-info">
+                            <div class="algorithm-name">Temporal Pattern Detection</div>
+                            <div class="algorithm-performance">94.7% accuracy</div>
+                        </div>
+                        <div class="algorithm-indicator active"></div>
+                    </div>
+                    
+                    <div class="algorithm-item">
+                        <div class="algorithm-icon bg-info">
+                            <i class="fas fa-language"></i>
+                        </div>
+                        <div class="algorithm-info">
+                            <div class="algorithm-name">Linguistic Analysis</div>
+                            <div class="algorithm-performance">91.2% accuracy</div>
+                        </div>
+                        <div class="algorithm-indicator active"></div>
+                    </div>
+                    
+                    <div class="algorithm-item">
+                        <div class="algorithm-icon bg-warning">
+                            <i class="fas fa-fingerprint"></i>
+                        </div>
+                        <div class="algorithm-info">
+                            <div class="algorithm-name">Behavioral Fingerprinting</div>
+                            <div class="algorithm-performance">89.5% accuracy</div>
+                        </div>
+                        <div class="algorithm-indicator active"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-chart-network me-2"></i>Network Visualization
+                </h6>
+            </div>
+            <div class="card-body text-center">
+                <div class="network-preview">
+                    <canvas id="networkChart" width="300" height="200"></canvas>
+                </div>
+                <p class="text-muted small mt-2">
+                    Interactive network graph showing connections between coordinated accounts
+                </p>
+                <button class="btn btn-sm btn-outline-primary">
+                    <i class="fas fa-expand-arrows-alt"></i> Full View
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Disruption Tools -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-tools me-2"></i>Automated Disruption Tools
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="disruption-tool">
+                            <div class="tool-icon bg-danger">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h6>Mass Account Suspension</h6>
+                                <p class="text-muted small">Automatically suspend all identified coordinated accounts</p>
+                                <div class="tool-stats">
+                                    <span class="badge bg-danger">247 suspended today</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-danger">Execute</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="disruption-tool">
+                            <div class="tool-icon bg-warning">
+                                <i class="fas fa-volume-mute"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h6>Network Shadowban</h6>
+                                <p class="text-muted small">Reduce visibility of coordinated harassment content</p>
+                                <div class="tool-stats">
+                                    <span class="badge bg-warning">89 networks affected</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-warning">Deploy</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="disruption-tool">
+                            <div class="tool-icon bg-info">
+                                <i class="fas fa-random"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h6>Pattern Disruption</h6>
+                                <p class="text-muted small">Introduce chaos to break coordination patterns</p>
+                                <div class="tool-stats">
+                                    <span class="badge bg-info">12 patterns disrupted</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-info">Activate</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="disruption-tool">
+                            <div class="tool-icon bg-success">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h6>Victim Protection</h6>
+                                <p class="text-muted small">Enhanced protection for targeted individuals</p>
+                                <div class="tool-stats">
+                                    <span class="badge bg-success">67 users protected</span>
+                                </div>
+                                <button class="btn btn-sm btn-outline-success">Enable</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detection Analytics -->
+<div class="row mb-4">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>Campaign Detection Trends
+                </h6>
+            </div>
+            <div class="card-body">
+                <canvas id="detectionTrendsChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-pie-chart me-2"></i>Attack Vector Analysis
+                </h6>
+            </div>
+            <div class="card-body">
+                <canvas id="attackVectorChart" height="200"></canvas>
+                <div class="vector-legend mt-3">
+                    <div class="legend-item">
+                        <span class="legend-color bg-danger"></span>
+                        <span class="legend-label">Bot Networks (45%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color bg-warning"></span>
+                        <span class="legend-label">Sockpuppets (28%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color bg-info"></span>
+                        <span class="legend-label">Brigading (18%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-color bg-secondary"></span>
+                        <span class="legend-label">Other (9%)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Investigation Tools -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-search-plus me-2"></i>Advanced Investigation Tools
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="investigation-tabs">
+                    <nav>
+                        <div class="nav nav-tabs" role="tablist">
+                            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#account-analysis">Account Analysis</button>
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#network-mapping">Network Mapping</button>
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#behavioral-analysis">Behavioral Analysis</button>
+                        </div>
+                    </nav>
+                    
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="account-analysis">
+                            <div class="account-search">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <input type="text" class="form-control" placeholder="Enter username or account ID to investigate">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <button class="btn btn-primary w-100">
+                                            <i class="fas fa-search"></i> Analyze Account
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="investigation-results mt-3">
+                                <div class="result-placeholder">
+                                    <i class="fas fa-search fa-3x text-muted mb-3"></i>
+                                    <p class="text-muted">Enter an account to begin investigation</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="network-mapping">
+                            <div class="network-tools">
+                                <p class="text-muted">Interactive network visualization and connection analysis tools</p>
+                                <button class="btn btn-outline-primary">Launch Network Mapper</button>
+                            </div>
+                        </div>
+                        
+                        <div class="tab-pane fade" id="behavioral-analysis">
+                            <div class="behavior-tools">
+                                <p class="text-muted">Advanced behavioral pattern analysis and anomaly detection</p>
+                                <button class="btn btn-outline-success">Start Behavioral Scan</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Recent Alerts
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="alert-feed">
+                    <div class="alert-item critical">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-circle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">Critical Campaign Detected</div>
+                            <div class="alert-desc">47-account bot network targeting vulnerable user</div>
+                            <div class="alert-time">12 minutes ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item high">
+                        <div class="alert-icon">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">New Network Identified</div>
+                            <div class="alert-desc">23 sockpuppet accounts discovered in harassment ring</div>
+                            <div class="alert-time">1 hour ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item medium">
+                        <div class="alert-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">Bot Behavior Evolution</div>
+                            <div class="alert-desc">AI detected new coordination patterns</div>
+                            <div class="alert-time">3 hours ago</div>
+                        </div>
+                    </div>
+                    
+                    <div class="alert-item low">
+                        <div class="alert-icon">
+                            <i class="fas fa-shield-check"></i>
+                        </div>
+                        <div class="alert-content">
+                            <div class="alert-title">Disruption Successful</div>
+                            <div class="alert-desc">Harassment campaign neutralized</div>
+                            <div class="alert-time">5 hours ago</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.harassment-header {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(253, 126, 20, 0.1) 100%);
+    border-radius: 10px;
+    margin: -1rem -15px 0 -15px;
+    padding: 2rem 15px;
+}
+
+.detection-status {
+    display: flex;
+    align-items: center;
+}
+
+.status-indicator.scanning {
+    background: linear-gradient(45deg, #dc3545, #fd7e14);
+    animation: scanning 2s linear infinite;
+}
+
+@keyframes scanning {
+    0% { background: #dc3545; }
+    50% { background: #fd7e14; }
+    100% { background: #dc3545; }
+}
+
+.detection-metric-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.detection-metric-card:hover {
+    transform: translateY(-3px);
+}
+
+.detection-metric-card.campaigns-detected {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.detection-metric-card.bot-networks {
+    background: linear-gradient(135deg, #6f42c1, #59359a);
+}
+
+.detection-metric-card.coordinated-accounts {
+    background: linear-gradient(135deg, #fd7e14, #e8670e);
+}
+
+.detection-metric-card.disruption-rate {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.campaign-item {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.campaign-item:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.campaign-item.priority-critical {
+    border-left: 4px solid #dc3545;
+    background: rgba(220, 53, 69, 0.05);
+}
+
+.campaign-item.priority-high {
+    border-left: 4px solid #fd7e14;
+    background: rgba(253, 126, 20, 0.05);
+}
+
+.campaign-item.priority-medium {
+    border-left: 4px solid #ffc107;
+    background: rgba(255, 193, 7, 0.05);
+}
+
+.campaign-header {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+}
+
+.campaign-indicator {
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.priority-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.priority-badge.critical {
+    background: #dc3545;
+    animation: pulse 2s infinite;
+}
+
+.priority-badge.high {
+    background: #fd7e14;
+}
+
+.priority-badge.medium {
+    background: #ffc107;
+    color: #212529;
+}
+
+.campaign-type {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.campaign-info {
+    flex-grow: 1;
+}
+
+.campaign-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.campaign-meta {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.campaign-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.campaign-details {
+    padding: 0 1.5rem 1.5rem;
+    border-top: 1px solid #e9ecef;
+    margin-top: 1rem;
+    padding-top: 1rem;
+}
+
+.network-analysis, .attack-pattern, .coordination-indicators {
+    margin-bottom: 2rem;
+}
+
+.network-analysis h6, .attack-pattern h6, .coordination-indicators h6 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.network-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+}
+
+.stat-label {
+    font-weight: 500;
+}
+
+.stat-value {
+    font-weight: 600;
+}
+
+.pattern-timeline {
+    position: relative;
+    padding-left: 2rem;
+}
+
+.pattern-timeline::before {
+    content: '';
+    position: absolute;
+    left: 10px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -23px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ffc107;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #dee2e6;
+}
+
+.timeline-time {
+    font-weight: 600;
+    color: #6c757d;
+    margin-right: 1rem;
+    min-width: 60px;
+}
+
+.timeline-event {
+    color: #2c3e50;
+}
+
+.indicator-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.indicator-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #f8f9fa;
+}
+
+.indicator-item.high {
+    background: rgba(220, 53, 69, 0.1);
+    border: 1px solid rgba(220, 53, 69, 0.3);
+}
+
+.indicator-item.medium {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.indicator-item i {
+    margin-right: 0.75rem;
+    font-size: 1.2rem;
+}
+
+.indicator-item.high i {
+    color: #dc3545;
+}
+
+.indicator-item.medium i {
+    color: #ffc107;
+}
+
+.indicator-item span {
+    flex-grow: 1;
+    font-weight: 500;
+}
+
+.confidence-score {
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.indicator-item.high .confidence-score {
+    color: #dc3545;
+}
+
+.indicator-item.medium .confidence-score {
+    color: #ffc107;
+}
+
+.algorithm-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.algorithm-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.algorithm-info {
+    flex-grow: 1;
+}
+
+.algorithm-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.algorithm-performance {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.algorithm-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #dee2e6;
+}
+
+.algorithm-indicator.active {
+    background: #28a745;
+    animation: pulse 2s infinite;
+}
+
+.network-preview {
+    position: relative;
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.disruption-tool {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.disruption-tool:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.disruption-tool .tool-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.disruption-tool .tool-content h6 {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.disruption-tool .tool-stats {
+    margin: 1rem 0;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.legend-color {
+    width: 12px;
+    height: 12px;
+    border-radius: 2px;
+    margin-right: 0.5rem;
+}
+
+.legend-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.investigation-tabs {
+    margin-top: 1rem;
+}
+
+.investigation-tabs .tab-content {
+    padding: 1.5rem 0;
+}
+
+.result-placeholder {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.alert-feed {
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.alert-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.alert-item.critical {
+    background: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+}
+
+.alert-item.high {
+    background: rgba(253, 126, 20, 0.1);
+    border-left: 4px solid #fd7e14;
+}
+
+.alert-item.medium {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #ffc107;
+}
+
+.alert-item.low {
+    background: rgba(40, 167, 69, 0.1);
+    border-left: 4px solid #28a745;
+}
+
+.alert-icon {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.alert-item.critical .alert-icon {
+    color: #dc3545;
+}
+
+.alert-item.high .alert-icon {
+    color: #fd7e14;
+}
+
+.alert-item.medium .alert-icon {
+    color: #ffc107;
+}
+
+.alert-item.low .alert-icon {
+    color: #28a745;
+}
+
+.alert-content {
+    flex-grow: 1;
+}
+
+.alert-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.alert-desc {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.alert-time {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Detection Trends Chart
+const trendsCtx = document.getElementById('detectionTrendsChart').getContext('2d');
+const trendsChart = new Chart(trendsCtx, {
+    type: 'line',
+    data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+            label: 'Campaigns Detected',
+            data: [12, 8, 15, 23, 18, 11, 7],
+            borderColor: '#dc3545',
+            backgroundColor: 'rgba(220, 53, 69, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: 'Campaigns Disrupted',
+            data: [11, 7, 14, 22, 17, 10, 6],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0,0,0,0.05)'
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    }
+});
+
+// Attack Vector Chart
+const vectorCtx = document.getElementById('attackVectorChart').getContext('2d');
+const vectorChart = new Chart(vectorCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Bot Networks', 'Sockpuppets', 'Brigading', 'Other'],
+        datasets: [{
+            data: [45, 28, 18, 9],
+            backgroundColor: ['#dc3545', '#ffc107', '#17a2b8', '#6c757d'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+// Network Visualization (simple demonstration)
+const networkCtx = document.getElementById('networkChart').getContext('2d');
+networkCtx.fillStyle = '#f8f9fa';
+networkCtx.fillRect(0, 0, 300, 200);
+
+// Draw nodes and connections
+const nodes = [
+    {x: 150, y: 100, size: 8, color: '#dc3545'}, // Central malicious node
+    {x: 100, y: 70, size: 4, color: '#fd7e14'},
+    {x: 200, y: 70, size: 4, color: '#fd7e14'},
+    {x: 80, y: 130, size: 4, color: '#fd7e14'},
+    {x: 220, y: 130, size: 4, color: '#fd7e14'},
+    {x: 120, y: 150, size: 4, color: '#ffc107'},
+    {x: 180, y: 150, size: 4, color: '#ffc107'}
+];
+
+// Draw connections
+networkCtx.strokeStyle = '#dc3545';
+networkCtx.lineWidth = 2;
+nodes.forEach((node, i) => {
+    if (i > 0) {
+        networkCtx.beginPath();
+        networkCtx.moveTo(nodes[0].x, nodes[0].y);
+        networkCtx.lineTo(node.x, node.y);
+        networkCtx.stroke();
+    }
+});
+
+// Draw nodes
+nodes.forEach(node => {
+    networkCtx.fillStyle = node.color;
+    networkCtx.beginPath();
+    networkCtx.arc(node.x, node.y, node.size, 0, 2 * Math.PI);
+    networkCtx.fill();
+});
+
+// Campaign action handlers
+function disruptCampaign(campaignId, action) {
+    console.log(`Disrupting campaign ${campaignId} with action: ${action}`);
+    
+    const actions = {
+        'disrupt_all': 'All coordinated accounts have been suspended and content removed',
+        'mass_report': 'Mass reporting initiated across all platforms',
+        'shadowban': 'Network visibility reduced by 95%',
+        'protect_victim': 'Enhanced protection activated for targeted users',
+        'pattern_disruption': 'Coordination patterns disrupted successfully'
+    };
+    
+    alert(actions[action] || 'Disruption action completed successfully');
+    
+    // Update UI to show action completed
+    const button = event.target;
+    button.innerHTML = '<i class="fas fa-check"></i> Completed';
+    button.classList.remove('btn-danger', 'btn-warning');
+    button.classList.add('btn-success');
+    button.disabled = true;
+}
+
+// Investigation tools
+function analyzeAccount() {
+    const input = document.querySelector('#account-analysis input');
+    const account = input.value.trim();
+    
+    if (!account) {
+        alert('Please enter an account to analyze');
+        return;
+    }
+    
+    const resultsDiv = document.querySelector('.investigation-results');
+    resultsDiv.innerHTML = `
+        <div class="analysis-result">
+            <h6>Analysis Results for: ${account}</h6>
+            <div class="row">
+                <div class="col-md-6">
+                    <strong>Account Age:</strong> ${Math.floor(Math.random() * 1000) + 1} days<br>
+                    <strong>Followers:</strong> ${Math.floor(Math.random() * 10000)}<br>
+                    <strong>Following:</strong> ${Math.floor(Math.random() * 5000)}<br>
+                    <strong>Posts:</strong> ${Math.floor(Math.random() * 1000)}
+                </div>
+                <div class="col-md-6">
+                    <strong>Bot Probability:</strong> <span class="text-danger">${Math.floor(Math.random() * 40) + 60}%</span><br>
+                    <strong>Coordinated Activity:</strong> <span class="text-warning">Detected</span><br>
+                    <strong>Network Connections:</strong> ${Math.floor(Math.random() * 20) + 5}<br>
+                    <strong>Risk Level:</strong> <span class="text-danger">High</span>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Real-time updates
+setInterval(() => {
+    // Update metrics with small random changes
+    document.querySelectorAll('.metric-number').forEach(metric => {
+        if (!metric.textContent.includes('%')) {
+            const current = parseInt(metric.textContent);
+            const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+            const newValue = Math.max(0, current + variation);
+            metric.textContent = newValue;
+        }
+    });
+    
+    // Occasionally add new alerts
+    if (Math.random() < 0.1) { // 10% chance
+        addNewAlert();
+    }
+}, 20000); // Every 20 seconds
+
+function addNewAlert() {
+    const alertTypes = [
+        {
+            level: 'critical',
+            icon: 'fas fa-exclamation-circle',
+            title: 'Critical Campaign Detected',
+            desc: `${Math.floor(Math.random() * 50) + 20}-account network targeting users`,
+            color: '#dc3545'
+        },
+        {
+            level: 'high',
+            icon: 'fas fa-network-wired',
+            title: 'Network Expansion Detected',
+            desc: 'Existing harassment network adding new accounts',
+            color: '#fd7e14'
+        },
+        {
+            level: 'medium',
+            icon: 'fas fa-robot',
+            title: 'Bot Behavior Pattern',
+            desc: 'New automation patterns detected',
+            color: '#ffc107'
+        }
+    ];
+    
+    const alert = alertTypes[Math.floor(Math.random() * alertTypes.length)];
+    const alertFeed = document.querySelector('.alert-feed');
+    
+    const alertElement = document.createElement('div');
+    alertElement.className = `alert-item ${alert.level}`;
+    alertElement.innerHTML = `
+        <div class="alert-icon">
+            <i class="${alert.icon}"></i>
+        </div>
+        <div class="alert-content">
+            <div class="alert-title">${alert.title}</div>
+            <div class="alert-desc">${alert.desc}</div>
+            <div class="alert-time">Just now</div>
+        </div>
+    `;
+    
+    alertFeed.insertBefore(alertElement, alertFeed.firstChild);
+    
+    // Keep only latest 10 alerts
+    const alerts = alertFeed.querySelectorAll('.alert-item');
+    if (alerts.length > 10) {
+        alerts[alerts.length - 1].remove();
+    }
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Coordinated Harassment Detection System initialized');
+    
+    // Set up account analysis
+    const analyzeButton = document.querySelector('#account-analysis + .investigation-results').previousElementSibling.querySelector('button');
+    if (analyzeButton) {
+        analyzeButton.addEventListener('click', analyzeAccount);
+    }
+    
+    // Add event listeners for disruption tools
+    document.querySelectorAll('.disruption-tool button').forEach(button => {
+        button.addEventListener('click', function() {
+            const toolName = this.closest('.disruption-tool').querySelector('h6').textContent;
+            console.log(`Activating: ${toolName}`);
+            alert(`${toolName} has been activated successfully!`);
+        });
+    });
+});
+</script>
+{% endblock %}

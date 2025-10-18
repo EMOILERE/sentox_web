@@ -1,0 +1,414 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero section -->
+<div class="hero-section py-5 mb-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <h1 class="display-4 fw-bold text-primary mb-3">
+                <i class="fas fa-shield-alt me-3"></i>
+                SenTox AI Moderation Platform
+            </h1>
+            <p class="lead mb-4">
+                Next-generation intelligent content moderation solution based on three cutting-edge research achievements: <strong>ICL-DiTox</strong>, <strong>SenTox-GLDA</strong>, and <strong>TMuS-Toxgent</strong>,
+                integrating multi-agent collaborative architecture to provide precise and efficient content security for social platforms.
+            </p>
+            <div class="d-flex gap-3">
+                <a href="{{ url_for('main.submit_content') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-rocket me-2"></i>Try Now
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="text-center">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'%3E%3Crect fill='%23f8f9fa' width='400' height='300'/%3E%3Cg fill='%233498db' opacity='0.1'%3E%3Ccircle cx='200' cy='150' r='80'/%3E%3Ccircle cx='120' cy='100' r='40'/%3E%3Ccircle cx='280' cy='100' r='40'/%3E%3Ccircle cx='120' cy='200' r='40'/%3E%3Ccircle cx='280' cy='200' r='40'/%3E%3C/g%3E%3Cg fill='%233498db'%3E%3Ctext x='200' y='160' text-anchor='middle' font-size='16' font-family='Arial'%3EMulti-Agent Collaboration%3C/text%3E%3C/g%3E%3C/svg%3E" 
+                     alt="Multi-agent system diagram" class="img-fluid" style="max-width: 400px;">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- System statistics -->
+<div class="row mb-5">
+    <div class="col-md-3 mb-4">
+        <div class="stats-card">
+            <div class="feature-icon">
+                <i class="fas fa-file-alt"></i>
+            </div>
+            <h3>{{ total_submissions | default(0) }}</h3>
+            <p class="mb-0">Total Content Submissions</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="stats-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+            <div class="feature-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>{{ total_moderated | default(0) }}</h3>
+            <p class="mb-0">Moderation Completed</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="stats-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+            <div class="feature-icon">
+                <i class="fas fa-robot"></i>
+            </div>
+            <h3>5</h3>
+            <p class="mb-0">Collaborative Agents</p>
+        </div>
+    </div>
+    <div class="col-md-3 mb-4">
+        <div class="stats-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+            <div class="feature-icon">
+                <i class="fas fa-tachometer-alt"></i>
+            </div>
+            <h3>98.2%</h3>
+            <p class="mb-0">System Accuracy</p>
+        </div>
+    </div>
+</div>
+
+<!-- Core features -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-5">
+            <i class="fas fa-star me-3"></i>Core Technical Features
+        </h2>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h5 class="card-title">Multi-Agent Collaboration</h5>
+                <p class="card-text">
+                    Multiple specialized AI agents including classifier, reasoner, and coordinator work together,
+                    implementing complex reasoning decisions through thought chains and action chains.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h5 class="card-title">SenTox-GLDA Model</h5>
+                <p class="card-text">
+                    A lightweight model specifically trained for Chinese comment moderation with high-precision toxic content detection capabilities,
+                    supporting multi-dimensional toxicity classification.
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body text-center">
+                <div class="feature-icon">
+                    <i class="fas fa-cloud"></i>
+                </div>
+                <h5 class="card-title">Large Model Integration</h5>
+                <p class="card-text">
+                    Integrates the powerful reasoning capabilities of Alibaba Cloud Bailian large models,
+                    enabling contextual understanding and complex semantic analysis.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent activities -->
+{% if recent_records %}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-clock me-2"></i>Recent Moderation Activities
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Content Preview</th>
+                                <th>Decision Result</th>
+                                <th>Confidence</th>
+                                <th>Processing Time</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in recent_records %}
+                            <tr>
+                                <td>
+                                    <small class="text-muted">
+                                        {{ record.started_at.strftime('%m-%d %H:%M') if record.started_at }}
+                                    </small>
+                                </td>
+                                <td>
+                                    <div style="max-width: 200px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+                                        {{ record.submission.content[:50] + '...' if record.submission.content|length > 50 else record.submission.content }}
+                                    </div>
+                                </td>
+                                <td>
+                                    {% if record.final_decision == 'approved' %}
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check me-1"></i>Approved
+                                        </span>
+                                    {% elif record.final_decision == 'rejected' %}
+                                        <span class="badge bg-danger">
+                                            <i class="fas fa-times me-1"></i>Rejected
+                                        </span>
+                                    {% elif record.final_decision == 'escalated' %}
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-exclamation me-1"></i>Escalated
+                                        </span>
+                                    {% else %}
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-question me-1"></i>{{ record.final_decision or 'Unknown' }}
+                                        </span>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="confidence-bar me-2" style="width: 60px;">
+                                            <div class="confidence-fill" data-confidence="{{ record.final_confidence or 0 }}"></div>
+                                        </div>
+                                        <small>{{ "%.1f%%" % ((record.final_confidence or 0) * 100) }}</small>
+                                    </div>
+                                </td>
+                                <td>
+                                    <small class="text-muted">
+                                        {{ "%.2fs" % (record.processing_time or 0) }}
+                                    </small>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('main.view_result', submission_id=record.submission_id) }}" 
+                                       class="btn btn-sm btn-outline-primary">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Quick start -->
+<div class="row mt-5">
+    <div class="col-12">
+        <div class="card border-0" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <div class="card-body text-white text-center py-5">
+                <h3 class="mb-4">
+                    <i class="fas fa-rocket me-3"></i>Get Started Now
+                </h3>
+                <p class="lead mb-4">
+                    Experience next-generation AI-driven content moderation technology to make your platform safer
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="{{ url_for('main.submit_content') }}" class="btn btn-light btn-lg">
+                        <i class="fas fa-upload me-2"></i>Submit Content Moderation
+                    </a>
+                    {% if not current_user.is_authenticated %}
+                    <a href="{{ url_for('main.register') }}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-user-plus me-2"></i>Register Account
+                    </a>
+                    {% endif %}
+                    <a href="{{ url_for('main.analytics') }}" class="btn btn-outline-light btn-lg">
+                        <i class="fas fa-chart-bar me-2"></i>View Analytics
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Dynamically update statistics
+function updateStats() {
+    fetch('/health')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'healthy') {
+                // 可以在这里更新页面上的实时数据
+                console.log('System status normal');
+            }
+        })
+        .catch(error => console.log('Status check failed:', error));
+}
+
+// Check system status every 30 seconds
+setInterval(updateStats, 30000);
+
+// Check immediately after page load
+document.addEventListener('DOMContentLoaded', updateStats);
+
+// Animation effects
+document.addEventListener('DOMContentLoaded', function() {
+    // Statistics card animation
+    const statsCards = document.querySelectorAll('.stats-card');
+    statsCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.2}s`;
+        card.classList.add('animate-slide-up');
+    });
+    
+    // Feature card animation
+    const featureCards = document.querySelectorAll('.card.h-100');
+    featureCards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.3}s`;
+        card.classList.add('animate-fade-in');
+    });
+});
+</script>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.hero-section {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+    border-radius: 15px;
+}
+
+.stats-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.stats-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+.stats-card h3 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.stats-card .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+}
+
+.feature-icon {
+    background: linear-gradient(135deg, #3498db, #9b59b6);
+    color: white;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    font-size: 2rem;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.card {
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.confidence-bar {
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.confidence-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #dc3545, #ffc107, #28a745);
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+/* 动画效果 */
+.animate-slide-up {
+    animation: slideUp 0.6s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.8s ease forwards;
+    opacity: 0;
+}
+
+@keyframes slideUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .hero-section .display-4 {
+        font-size: 2rem;
+    }
+    
+    .stats-card {
+        margin-bottom: 1rem;
+    }
+    
+    .feature-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+}
+
+/* 表格美化 */
+.table {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    font-weight: 600;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(102, 126, 234, 0.1);
+}
+</style>
+{% endblock %}

@@ -1,0 +1,831 @@
+{% extends "base.html" %}
+
+{% block title %}Smart Comment Filter - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="filter-header py-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <h1 class="h2 mb-2">
+                <i class="fas fa-filter me-3"></i>
+                Smart Comment Filter
+            </h1>
+            <p class="text-muted mb-0">
+                Automatically filter and curate comments to showcase the best interactions while protecting your community
+            </p>
+        </div>
+        <div class="col-lg-4 text-end">
+            <div class="filter-status">
+                <span class="status-indicator active"></span>
+                <span class="status-label">Auto-Filter Active</span>
+                <button class="btn btn-outline-primary btn-sm ms-2" id="toggleFilter">
+                    <i class="fas fa-pause"></i> Pause
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Statistics -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-primary text-white">
+            <div class="stat-icon">
+                <i class="fas fa-comments"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">{{ data.total_comments }}</div>
+                <div class="stat-label">Total Comments Today</div>
+                <div class="stat-change">+18% vs yesterday</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-success text-white">
+            <div class="stat-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">{{ data.approved }}</div>
+                <div class="stat-label">Approved & Displayed</div>
+                <div class="stat-change">{{ "%.1f%%" % (data.approved / data.total_comments * 100) }} of total</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-danger text-white">
+            <div class="stat-icon">
+                <i class="fas fa-ban"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">{{ data.filtered_out }}</div>
+                <div class="stat-label">Filtered Out</div>
+                <div class="stat-change">{{ "%.1f%%" % (data.filtered_out / data.total_comments * 100) }} blocked</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="stat-card bg-warning text-white">
+            <div class="stat-icon">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div class="stat-content">
+                <div class="stat-number">{{ data.pending_review }}</div>
+                <div class="stat-label">Pending Review</div>
+                <div class="stat-change">Manual review needed</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filter Controls -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-sliders-h me-2"></i>Filter Configuration
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="filter-group">
+                            <h6>Content Filtering</h6>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="toxicityFilter" checked>
+                                <label class="form-check-label" for="toxicityFilter">
+                                    Block toxic content
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="spamFilter" checked>
+                                <label class="form-check-label" for="spamFilter">
+                                    Filter spam and promotional content
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="offTopicFilter">
+                                <label class="form-check-label" for="offTopicFilter">
+                                    Hide off-topic comments
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="duplicateFilter" checked>
+                                <label class="form-check-label" for="duplicateFilter">
+                                    Remove duplicate comments
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="filter-group">
+                            <h6>Quality Enhancement</h6>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="positivityBoost" checked>
+                                <label class="form-check-label" for="positivityBoost">
+                                    Prioritize positive comments
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="constructiveFilter" checked>
+                                <label class="form-check-label" for="constructiveFilter">
+                                    Highlight constructive feedback
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="questionFilter">
+                                <label class="form-check-label" for="questionFilter">
+                                    Boost questions and engagement
+                                </label>
+                            </div>
+                            <div class="form-check form-switch mb-2">
+                                <input class="form-check-input" type="checkbox" id="expertFilter">
+                                <label class="form-check-label" for="expertFilter">
+                                    Prioritize expert contributors
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row mt-3">
+                    <div class="col-md-6">
+                        <label for="sensitivityLevel" class="form-label">Filter Sensitivity</label>
+                        <input type="range" class="form-range" id="sensitivityLevel" min="1" max="5" value="3">
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">Permissive</small>
+                            <small class="text-muted">Balanced</small>
+                            <small class="text-muted">Strict</small>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="autoApproval" class="form-label">Auto-Approval Threshold</label>
+                        <input type="range" class="form-range" id="autoApproval" min="50" max="95" value="85">
+                        <div class="d-flex justify-content-between">
+                            <small class="text-muted">50% confidence</small>
+                            <small class="text-muted">85% (current)</small>
+                            <small class="text-muted">95%</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-chart-pie me-2"></i>Filter Effectiveness
+                </h6>
+            </div>
+            <div class="card-body text-center">
+                <div class="effectiveness-score">
+                    <div class="score-circle">
+                        <span class="score-value">{{ "%.1f" % data.filter_effectiveness }}%</span>
+                    </div>
+                    <p class="text-muted mt-2">Overall effectiveness based on user feedback and engagement metrics</p>
+                </div>
+                
+                <div class="effectiveness-breakdown">
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Accuracy:</span>
+                        <span class="breakdown-value text-success">96.2%</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">Speed:</span>
+                        <span class="breakdown-value text-info">0.3s avg</span>
+                    </div>
+                    <div class="breakdown-item">
+                        <span class="breakdown-label">User Satisfaction:</span>
+                        <span class="breakdown-value text-warning">4.7/5</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Real-time Comment Feed -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-stream me-2"></i>Live Comment Stream
+                </h5>
+                <div class="stream-controls">
+                    <button class="btn btn-sm btn-outline-primary" id="pauseStream">
+                        <i class="fas fa-pause"></i> Pause
+                    </button>
+                    <div class="btn-group btn-group-sm ms-2">
+                        <button class="btn btn-outline-secondary active" data-filter="all">All</button>
+                        <button class="btn btn-outline-secondary" data-filter="approved">Approved</button>
+                        <button class="btn btn-outline-secondary" data-filter="filtered">Filtered</button>
+                        <button class="btn btn-outline-secondary" data-filter="pending">Pending</button>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="comment-stream" id="commentStream">
+                    <!-- Comments will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Filtered Comments Review -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-eye-slash me-2"></i>Recently Filtered Comments
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="filtered-comments-list">
+                    <!-- Sample filtered comments -->
+                    <div class="filtered-comment-item">
+                        <div class="comment-content">
+                            <div class="comment-text">"This is the worst content I've ever seen. Complete waste of time."</div>
+                            <div class="comment-meta">
+                                <span class="comment-author">@anonymous_user</span>
+                                <span class="comment-time">2 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="filter-reason">
+                            <span class="reason-tag bg-danger">Toxic Content</span>
+                            <span class="confidence-score">97.3%</span>
+                        </div>
+                        <div class="comment-actions">
+                            <button class="btn btn-sm btn-outline-success" title="Approve">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" title="Keep Filtered">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="filtered-comment-item">
+                        <div class="comment-content">
+                            <div class="comment-text">"Check out my amazing products at www.spam-site.com! Best deals ever!"</div>
+                            <div class="comment-meta">
+                                <span class="comment-author">@promotional_bot</span>
+                                <span class="comment-time">5 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="filter-reason">
+                            <span class="reason-tag bg-warning">Spam/Promotional</span>
+                            <span class="confidence-score">94.8%</span>
+                        </div>
+                        <div class="comment-actions">
+                            <button class="btn btn-sm btn-outline-success" title="Approve">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" title="Keep Filtered">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="filtered-comment-item">
+                        <div class="comment-content">
+                            <div class="comment-text">"First! Love your content! Keep it up! Amazing as always! So good!"</div>
+                            <div class="comment-meta">
+                                <span class="comment-author">@repeat_commenter</span>
+                                <span class="comment-time">8 minutes ago</span>
+                            </div>
+                        </div>
+                        <div class="filter-reason">
+                            <span class="reason-tag bg-info">Duplicate/Generic</span>
+                            <span class="confidence-score">87.1%</span>
+                        </div>
+                        <div class="comment-actions">
+                            <button class="btn btn-sm btn-outline-success" title="Approve">
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" title="Keep Filtered">
+                                <i class="fas fa-times"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <button class="btn btn-outline-primary">Load More Filtered Comments</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-cog me-2"></i>Quick Actions
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="quick-action-item">
+                    <button class="btn btn-outline-primary w-100 mb-2">
+                        <i class="fas fa-download me-2"></i>Export Filter Report
+                    </button>
+                </div>
+                <div class="quick-action-item">
+                    <button class="btn btn-outline-info w-100 mb-2">
+                        <i class="fas fa-history me-2"></i>Review Filter History
+                    </button>
+                </div>
+                <div class="quick-action-item">
+                    <button class="btn btn-outline-warning w-100 mb-2">
+                        <i class="fas fa-exclamation-triangle me-2"></i>Report False Positives
+                    </button>
+                </div>
+                <div class="quick-action-item">
+                    <button class="btn btn-outline-success w-100">
+                        <i class="fas fa-share-alt me-2"></i>Share Filter Settings
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-3">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-bell me-2"></i>Filter Notifications
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="notification-item">
+                    <div class="notification-icon bg-success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-text">Filter accuracy improved to 96.2%</div>
+                        <div class="notification-time">1 hour ago</div>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-icon bg-warning">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-text">Unusual spike in filtered comments</div>
+                        <div class="notification-time">3 hours ago</div>
+                    </div>
+                </div>
+                
+                <div class="notification-item">
+                    <div class="notification-icon bg-info">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="notification-content">
+                        <div class="notification-text">New filter rules applied successfully</div>
+                        <div class="notification-time">5 hours ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.filter-header {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.05) 0%, rgba(155, 89, 182, 0.05) 100%);
+    border-radius: 10px;
+    margin: -1rem -15px 0 -15px;
+    padding: 2rem 15px;
+}
+
+.filter-status {
+    display: flex;
+    align-items: center;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.status-indicator.active {
+    background-color: #28a745;
+    animation: pulse 2s infinite;
+}
+
+.status-label {
+    font-weight: 600;
+    color: #28a745;
+}
+
+.stat-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-3px);
+}
+
+.stat-icon {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+    opacity: 0.8;
+}
+
+.stat-content {
+    flex-grow: 1;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 0.25rem;
+}
+
+.stat-change {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.filter-group {
+    margin-bottom: 2rem;
+}
+
+.filter-group h6 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.form-check {
+    margin-bottom: 0.75rem;
+}
+
+.effectiveness-score {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.score-circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.effectiveness-breakdown {
+    text-align: left;
+}
+
+.breakdown-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.breakdown-label {
+    font-weight: 500;
+}
+
+.breakdown-value {
+    font-weight: 600;
+}
+
+.comment-stream {
+    max-height: 500px;
+    overflow-y: auto;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    padding: 1rem;
+}
+
+.comment-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+.comment-item:hover {
+    background-color: #f8f9fa;
+}
+
+.comment-status {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.comment-status.approved {
+    background-color: #28a745;
+    color: white;
+}
+
+.comment-status.filtered {
+    background-color: #dc3545;
+    color: white;
+}
+
+.comment-status.pending {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.filtered-comment-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background-color: #f8f9fa;
+}
+
+.comment-content {
+    flex-grow: 1;
+    margin-right: 1rem;
+}
+
+.comment-text {
+    font-weight: 500;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.comment-meta {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.comment-author {
+    font-weight: 600;
+    margin-right: 1rem;
+}
+
+.filter-reason {
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.reason-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: white;
+    margin-bottom: 0.25rem;
+}
+
+.confidence-score {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #6c757d;
+}
+
+.comment-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.notification-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.notification-icon {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 0.8rem;
+    color: white;
+}
+
+.notification-content {
+    flex-grow: 1;
+}
+
+.notification-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-bottom: 0.25rem;
+}
+
+.notification-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Sample comments for simulation
+const sampleComments = [
+    { text: "Amazing content! Really helpful tutorial.", author: "@tech_enthusiast", status: "approved", confidence: 0.94 },
+    { text: "This is garbage, worst video ever!", author: "@negative_user", status: "filtered", confidence: 0.97, reason: "Toxic Content" },
+    { text: "Could you make a video about advanced techniques?", author: "@curious_learner", status: "approved", confidence: 0.89 },
+    { text: "First! Love your videos!", author: "@early_viewer", status: "filtered", confidence: 0.76, reason: "Generic/Spam" },
+    { text: "Great explanation of the concept, thanks!", author: "@grateful_viewer", status: "approved", confidence: 0.92 },
+    { text: "Buy my course for better content!", author: "@spammer", status: "filtered", confidence: 0.98, reason: "Promotional" },
+    { text: "This helped me solve my project issue.", author: "@developer", status: "approved", confidence: 0.88 },
+    { text: "Can you cover React hooks next?", author: "@react_dev", status: "pending", confidence: 0.82, reason: "Review Needed" }
+];
+
+let commentIndex = 0;
+let isStreamPaused = false;
+let currentFilter = 'all';
+
+function addCommentToStream() {
+    if (isStreamPaused) return;
+    
+    const comment = sampleComments[commentIndex % sampleComments.length];
+    const timestamp = new Date().toLocaleTimeString();
+    
+    // Check if comment matches current filter
+    if (currentFilter !== 'all' && comment.status !== currentFilter) {
+        commentIndex++;
+        return;
+    }
+    
+    const commentStream = document.getElementById('commentStream');
+    const commentElement = document.createElement('div');
+    commentElement.className = 'comment-item';
+    
+    let statusIcon = '';
+    switch (comment.status) {
+        case 'approved': statusIcon = '<i class="fas fa-check"></i>'; break;
+        case 'filtered': statusIcon = '<i class="fas fa-times"></i>'; break;
+        case 'pending': statusIcon = '<i class="fas fa-clock"></i>'; break;
+    }
+    
+    commentElement.innerHTML = `
+        <div class="comment-status ${comment.status}">
+            ${statusIcon}
+        </div>
+        <div class="comment-content flex-grow-1">
+            <div class="comment-text">${comment.text}</div>
+            <div class="comment-meta">
+                <span class="comment-author">${comment.author}</span>
+                <span class="comment-time">${timestamp}</span>
+                ${comment.reason ? `<span class="filter-reason text-muted">• ${comment.reason}</span>` : ''}
+            </div>
+        </div>
+        <div class="comment-confidence">
+            <small class="text-muted">${Math.round(comment.confidence * 100)}%</small>
+        </div>
+    `;
+    
+    commentStream.insertBefore(commentElement, commentStream.firstChild);
+    
+    // Keep only latest 20 comments
+    const comments = commentStream.querySelectorAll('.comment-item');
+    if (comments.length > 20) {
+        comments[comments.length - 1].remove();
+    }
+    
+    commentIndex++;
+}
+
+// Stream controls
+document.getElementById('pauseStream').addEventListener('click', function() {
+    isStreamPaused = !isStreamPaused;
+    const icon = this.querySelector('i');
+    const text = isStreamPaused ? 'Resume' : 'Pause';
+    icon.className = isStreamPaused ? 'fas fa-play' : 'fas fa-pause';
+    this.innerHTML = `<i class="${icon.className}"></i> ${text}`;
+});
+
+// Filter controls
+document.querySelectorAll('[data-filter]').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('[data-filter]').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        currentFilter = this.dataset.filter;
+        
+        // Clear current stream and restart
+        document.getElementById('commentStream').innerHTML = '';
+    });
+});
+
+// Toggle main filter
+document.getElementById('toggleFilter').addEventListener('click', function() {
+    const icon = this.querySelector('i');
+    const isActive = icon.classList.contains('fa-pause');
+    
+    if (isActive) {
+        icon.className = 'fas fa-play';
+        this.innerHTML = '<i class="fas fa-play"></i> Resume';
+        document.querySelector('.status-indicator').classList.remove('active');
+        document.querySelector('.status-label').textContent = 'Auto-Filter Paused';
+        document.querySelector('.status-label').style.color = '#dc3545';
+    } else {
+        icon.className = 'fas fa-pause';
+        this.innerHTML = '<i class="fas fa-pause"></i> Pause';
+        document.querySelector('.status-indicator').classList.add('active');
+        document.querySelector('.status-label').textContent = 'Auto-Filter Active';
+        document.querySelector('.status-label').style.color = '#28a745';
+    }
+});
+
+// Initialize comment stream
+document.addEventListener('DOMContentLoaded', function() {
+    // Add initial comments
+    for (let i = 0; i < 5; i++) {
+        setTimeout(() => addCommentToStream(), i * 500);
+    }
+    
+    // Continue adding comments every 3-8 seconds
+    function scheduleNext() {
+        const delay = Math.random() * 5000 + 3000;
+        setTimeout(() => {
+            addCommentToStream();
+            scheduleNext();
+        }, delay);
+    }
+    scheduleNext();
+    
+    // Update statistics periodically
+    setInterval(() => {
+        const stats = document.querySelectorAll('.stat-number');
+        stats.forEach(stat => {
+            if (!stat.textContent.includes('%')) {
+                const current = parseInt(stat.textContent);
+                const variation = Math.floor(Math.random() * 10) - 5;
+                const newValue = Math.max(0, current + variation);
+                stat.textContent = newValue;
+            }
+        });
+    }, 15000);
+});
+
+// Filter setting changes
+document.querySelectorAll('.form-check-input').forEach(checkbox => {
+    checkbox.addEventListener('change', function() {
+        console.log(`Filter ${this.id} ${this.checked ? 'enabled' : 'disabled'}`);
+        // Here you would typically send the settings to your backend
+    });
+});
+
+// Range slider updates
+document.querySelectorAll('.form-range').forEach(slider => {
+    slider.addEventListener('input', function() {
+        console.log(`${this.id} set to ${this.value}`);
+        // Here you would typically update the filter settings
+    });
+});
+</script>
+{% endblock %}

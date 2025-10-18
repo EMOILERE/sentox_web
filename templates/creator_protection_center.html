@@ -1,0 +1,1315 @@
+{% extends "base.html" %}
+
+{% block title %}Creator Protection Center - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="creator-header py-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <h1 class="h2 mb-2">
+                <i class="fas fa-user-shield me-3"></i>
+                Creator Protection Center
+            </h1>
+            <p class="text-muted mb-0">
+                Comprehensive protection suite designed specifically for content creators, influencers, and public figures facing online harassment
+            </p>
+        </div>
+        <div class="col-lg-4 text-end">
+            <div class="protection-level">
+                <div class="protection-badge premium">
+                    <i class="fas fa-crown"></i>
+                    Premium Protection
+                </div>
+                <button class="btn btn-outline-primary btn-sm ms-2">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Creator Profile & Threat Level -->
+<div class="row mb-4">
+    <div class="col-lg-4">
+        <div class="card creator-profile-card">
+            <div class="card-body text-center">
+                <div class="creator-avatar">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%233498db'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='40' fill='white'%3EC%3C/text%3E%3C/svg%3E" alt="Creator">
+                    <div class="protection-indicator active"></div>
+                </div>
+                <h5 class="creator-name">@content_creator_pro</h5>
+                <p class="creator-stats text-muted">2.3M followers • 847K monthly views</p>
+                
+                <div class="threat-level-indicator">
+                    <div class="threat-level moderate">
+                        <div class="threat-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="threat-info">
+                            <div class="threat-status">Moderate Risk</div>
+                            <div class="threat-description">Increased monitoring active</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="protection-features mt-3">
+                    <div class="feature-item active">
+                        <i class="fas fa-robot"></i>
+                        <span>AI Bodyguard</span>
+                    </div>
+                    <div class="feature-item active">
+                        <i class="fas fa-filter"></i>
+                        <span>Smart Filtering</span>
+                    </div>
+                    <div class="feature-item active">
+                        <i class="fas fa-bell"></i>
+                        <span>Threat Alerts</span>
+                    </div>
+                    <div class="feature-item">
+                        <i class="fas fa-users"></i>
+                        <span>Crisis Team</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-8">
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <div class="protection-metric threats-blocked">
+                    <div class="metric-icon">
+                        <i class="fas fa-shield-check"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-number">342</div>
+                        <div class="metric-label">Threats Blocked Today</div>
+                        <div class="metric-trend">-18% vs yesterday</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="protection-metric positive-engagement">
+                    <div class="metric-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-number">94.2%</div>
+                        <div class="metric-label">Positive Engagement</div>
+                        <div class="metric-trend">+2.3% this week</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="protection-metric fake-accounts">
+                    <div class="metric-icon">
+                        <i class="fas fa-user-times"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-number">23</div>
+                        <div class="metric-label">Fake Accounts Detected</div>
+                        <div class="metric-trend">+5 this week</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 mb-3">
+                <div class="protection-metric support-interventions">
+                    <div class="metric-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <div class="metric-content">
+                        <div class="metric-number">47</div>
+                        <div class="metric-label">Support Interventions</div>
+                        <div class="metric-trend">Active assistance</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Real-time Threat Monitoring -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-radar me-2"></i>Real-time Threat Detection
+                </h5>
+                <div class="threat-controls">
+                    <span class="active-threats">7 Active Threats</span>
+                    <button class="btn btn-sm btn-outline-danger ms-2">
+                        <i class="fas fa-exclamation-triangle"></i> Emergency Mode
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="threat-stream">
+                    <!-- High Priority Threat -->
+                    <div class="threat-item priority-high">
+                        <div class="threat-indicator">
+                            <div class="priority-badge high">URGENT</div>
+                            <div class="threat-type">Doxxing Attempt</div>
+                        </div>
+                        <div class="threat-details">
+                            <div class="threat-title">Personal information being shared on multiple platforms</div>
+                            <div class="threat-description">
+                                Detected coordinated effort to share your personal address and phone number 
+                                across Instagram, Twitter, and TikTok. 8 posts identified.
+                            </div>
+                            <div class="threat-meta">
+                                <span class="threat-time">Detected 12 minutes ago</span>
+                                <span class="threat-platforms">3 platforms affected</span>
+                                <span class="threat-reach">Estimated reach: 15K users</span>
+                            </div>
+                            <div class="impact-assessment">
+                                <i class="fas fa-exclamation-circle text-danger me-1"></i>
+                                <span class="impact-level">Critical - Legal action recommended</span>
+                            </div>
+                        </div>
+                        <div class="threat-actions">
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fas fa-ban"></i> Mass Report
+                            </button>
+                            <button class="btn btn-sm btn-dark">
+                                <i class="fas fa-gavel"></i> Legal Action
+                            </button>
+                            <button class="btn btn-sm btn-warning">
+                                <i class="fas fa-phone"></i> Crisis Support
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Medium Priority Threat -->
+                    <div class="threat-item priority-medium">
+                        <div class="threat-indicator">
+                            <div class="priority-badge medium">HIGH</div>
+                            <div class="threat-type">Impersonation Campaign</div>
+                        </div>
+                        <div class="threat-details">
+                            <div class="threat-title">5 fake accounts impersonating your brand</div>
+                            <div class="threat-description">
+                                Multiple accounts using your profile picture and similar usernames to 
+                                scam your followers and damage your reputation.
+                            </div>
+                            <div class="threat-meta">
+                                <span class="threat-time">Ongoing for 2 days</span>
+                                <span class="threat-platforms">Instagram, TikTok</span>
+                                <span class="threat-reach">Estimated reach: 8.2K users</span>
+                            </div>
+                            <div class="impact-assessment">
+                                <i class="fas fa-exclamation-triangle text-warning me-1"></i>
+                                <span class="impact-level">High - Brand reputation at risk</span>
+                            </div>
+                        </div>
+                        <div class="threat-actions">
+                            <button class="btn btn-sm btn-warning">
+                                <i class="fas fa-flag"></i> Report All
+                            </button>
+                            <button class="btn btn-sm btn-info">
+                                <i class="fas fa-bullhorn"></i> Public Warning
+                            </button>
+                            <button class="btn btn-sm btn-secondary">
+                                <i class="fas fa-eye"></i> Monitor
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Coordinated Harassment -->
+                    <div class="threat-item priority-medium">
+                        <div class="threat-indicator">
+                            <div class="priority-badge medium">HIGH</div>
+                            <div class="threat-type">Coordinated Harassment</div>
+                        </div>
+                        <div class="threat-details">
+                            <div class="threat-title">Organized attack campaign targeting recent content</div>
+                            <div class="threat-description">
+                                AI detected 12 accounts working together to flood your latest video with 
+                                hateful comments and targeted harassment.
+                            </div>
+                            <div class="threat-meta">
+                                <span class="threat-time">Started 45 minutes ago</span>
+                                <span class="threat-platforms">YouTube</span>
+                                <span class="threat-reach">127 hostile comments</span>
+                            </div>
+                            <div class="impact-assessment">
+                                <i class="fas fa-heart-broken text-danger me-1"></i>
+                                <span class="impact-level">Emotional distress - Support activated</span>
+                            </div>
+                        </div>
+                        <div class="threat-actions">
+                            <button class="btn btn-sm btn-primary">
+                                <i class="fas fa-filter"></i> Mass Filter
+                            </button>
+                            <button class="btn btn-sm btn-success">
+                                <i class="fas fa-heart"></i> Boost Support
+                            </button>
+                            <button class="btn btn-sm btn-info">
+                                <i class="fas fa-comments"></i> Community Rally
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-shield-virus me-2"></i>AI Protection Systems
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="protection-system">
+                    <div class="system-item active">
+                        <div class="system-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="system-info">
+                            <div class="system-name">AI Bodyguard</div>
+                            <div class="system-status">Active - Scanning 24/7</div>
+                        </div>
+                        <div class="system-toggle">
+                            <div class="toggle-switch active"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="system-item active">
+                        <div class="system-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="system-info">
+                            <div class="system-name">Deep Web Monitor</div>
+                            <div class="system-status">Scanning dark web mentions</div>
+                        </div>
+                        <div class="system-toggle">
+                            <div class="toggle-switch active"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="system-item active">
+                        <div class="system-icon">
+                            <i class="fas fa-user-secret"></i>
+                        </div>
+                        <div class="system-info">
+                            <div class="system-name">Identity Protection</div>
+                            <div class="system-status">Monitoring personal info leaks</div>
+                        </div>
+                        <div class="system-toggle">
+                            <div class="toggle-switch active"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="system-item">
+                        <div class="system-icon">
+                            <i class="fas fa-users-cog"></i>
+                        </div>
+                        <div class="system-info">
+                            <div class="system-name">Crisis Response Team</div>
+                            <div class="system-status">On-call 24/7</div>
+                        </div>
+                        <div class="system-toggle">
+                            <div class="toggle-switch"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-life-ring me-2"></i>Support Network
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="support-network">
+                    <div class="support-item">
+                        <div class="support-icon">
+                            <i class="fas fa-user-md text-primary"></i>
+                        </div>
+                        <div class="support-info">
+                            <h6>Mental Health Counselor</h6>
+                            <p class="small text-muted">Dr. Sarah Johnson - Available 24/7</p>
+                            <button class="btn btn-sm btn-outline-primary">Connect Now</button>
+                        </div>
+                    </div>
+                    
+                    <div class="support-item">
+                        <div class="support-icon">
+                            <i class="fas fa-balance-scale text-warning"></i>
+                        </div>
+                        <div class="support-info">
+                            <h6>Legal Advisor</h6>
+                            <p class="small text-muted">Cybersecurity & Privacy Law</p>
+                            <button class="btn btn-sm btn-outline-warning">Schedule Call</button>
+                        </div>
+                    </div>
+                    
+                    <div class="support-item">
+                        <div class="support-icon">
+                            <i class="fas fa-users text-success"></i>
+                        </div>
+                        <div class="support-info">
+                            <h6>Peer Support Group</h6>
+                            <p class="small text-muted">Creator community & mentorship</p>
+                            <button class="btn btn-sm btn-outline-success">Join Group</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Platform-specific Protection -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-globe me-2"></i>Platform-specific Protection Status
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="platform-protection-grid">
+                    <div class="platform-card instagram">
+                        <div class="platform-header">
+                            <div class="platform-icon">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h6>Instagram</h6>
+                                <span class="platform-followers">1.2M followers</span>
+                            </div>
+                            <div class="protection-status high">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                        <div class="platform-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Threats Blocked:</span>
+                                <span class="metric-value">87 today</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Fake Accounts:</span>
+                                <span class="metric-value">5 detected</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Harassment:</span>
+                                <span class="metric-value">12 incidents</span>
+                            </div>
+                        </div>
+                        <div class="platform-actions">
+                            <button class="btn btn-sm btn-outline-primary">Configure</button>
+                            <button class="btn btn-sm btn-outline-info">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-card youtube">
+                        <div class="platform-header">
+                            <div class="platform-icon">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h6>YouTube</h6>
+                                <span class="platform-followers">847K subscribers</span>
+                            </div>
+                            <div class="protection-status high">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                        <div class="platform-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Comments Filtered:</span>
+                                <span class="metric-value">234 today</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Spam Removed:</span>
+                                <span class="metric-value">56 items</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Coordinated Attacks:</span>
+                                <span class="metric-value">2 blocked</span>
+                            </div>
+                        </div>
+                        <div class="platform-actions">
+                            <button class="btn btn-sm btn-outline-primary">Configure</button>
+                            <button class="btn btn-sm btn-outline-info">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-card twitter">
+                        <div class="platform-header">
+                            <div class="platform-icon">
+                                <i class="fab fa-twitter"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h6>Twitter</h6>
+                                <span class="platform-followers">523K followers</span>
+                            </div>
+                            <div class="protection-status medium">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                        <div class="platform-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Mentions Filtered:</span>
+                                <span class="metric-value">156 today</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Trolls Blocked:</span>
+                                <span class="metric-value">23 accounts</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Hate Speech:</span>
+                                <span class="metric-value">8 incidents</span>
+                            </div>
+                        </div>
+                        <div class="platform-actions">
+                            <button class="btn btn-sm btn-outline-primary">Configure</button>
+                            <button class="btn btn-sm btn-outline-info">View Details</button>
+                        </div>
+                    </div>
+                    
+                    <div class="platform-card tiktok">
+                        <div class="platform-header">
+                            <div class="platform-icon">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h6>TikTok</h6>
+                                <span class="platform-followers">2.1M followers</span>
+                            </div>
+                            <div class="protection-status high">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                        </div>
+                        <div class="platform-metrics">
+                            <div class="metric">
+                                <span class="metric-label">Video Comments:</span>
+                                <span class="metric-value">445 filtered</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Duet Harassment:</span>
+                                <span class="metric-value">7 blocked</span>
+                            </div>
+                            <div class="metric">
+                                <span class="metric-label">Impersonators:</span>
+                                <span class="metric-value">3 reported</span>
+                            </div>
+                        </div>
+                        <div class="platform-actions">
+                            <button class="btn btn-sm btn-outline-primary">Configure</button>
+                            <button class="btn btn-sm btn-outline-info">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Emergency Response Tools -->
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card emergency-tools">
+            <div class="card-header bg-danger text-white">
+                <h6 class="mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Emergency Response Tools
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="emergency-tool">
+                    <div class="tool-icon bg-danger">
+                        <i class="fas fa-ban"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h6>Panic Button</h6>
+                        <p class="text-muted small">Instantly activate maximum protection across all platforms</p>
+                        <button class="btn btn-danger btn-sm">
+                            <i class="fas fa-hand-paper"></i> ACTIVATE PANIC MODE
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="emergency-tool">
+                    <div class="tool-icon bg-warning">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h6>Crisis Hotline</h6>
+                        <p class="text-muted small">24/7 immediate support for severe harassment situations</p>
+                        <button class="btn btn-warning btn-sm">
+                            <i class="fas fa-phone"></i> CALL NOW: 1-800-CREATOR
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="emergency-tool">
+                    <div class="tool-icon bg-info">
+                        <i class="fas fa-gavel"></i>
+                    </div>
+                    <div class="tool-content">
+                        <h6>Legal Emergency</h6>
+                        <p class="text-muted small">Immediate legal consultation for serious threats</p>
+                        <button class="btn btn-info btn-sm">
+                            <i class="fas fa-balance-scale"></i> URGENT LEGAL HELP
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-chart-pulse me-2"></i>Well-being Monitor
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="wellbeing-score">
+                    <div class="score-circle">
+                        <canvas id="wellbeingChart" width="120" height="120"></canvas>
+                        <div class="score-content">
+                            <div class="score-value">73</div>
+                            <div class="score-label">Good</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wellbeing-factors">
+                    <div class="factor-item">
+                        <span class="factor-label">Stress Level:</span>
+                        <div class="factor-bar">
+                            <div class="factor-fill moderate" style="width: 60%"></div>
+                        </div>
+                        <span class="factor-value">Moderate</span>
+                    </div>
+                    
+                    <div class="factor-item">
+                        <span class="factor-label">Community Support:</span>
+                        <div class="factor-bar">
+                            <div class="factor-fill high" style="width: 85%"></div>
+                        </div>
+                        <span class="factor-value">High</span>
+                    </div>
+                    
+                    <div class="factor-item">
+                        <span class="factor-label">Content Confidence:</span>
+                        <div class="factor-bar">
+                            <div class="factor-fill good" style="width: 78%"></div>
+                        </div>
+                        <span class="factor-value">Good</span>
+                    </div>
+                </div>
+                
+                <div class="wellbeing-recommendations">
+                    <h6>AI Recommendations:</h6>
+                    <ul class="small text-muted">
+                        <li>Consider taking a 2-hour break from social media</li>
+                        <li>Engage with your top supportive community members</li>
+                        <li>Schedule a call with your mental health counselor</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.creator-header {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(142, 68, 173, 0.1) 100%);
+    border-radius: 10px;
+    margin: -1rem -15px 0 -15px;
+    padding: 2rem 15px;
+}
+
+.protection-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+}
+
+.protection-badge.premium {
+    background: linear-gradient(135deg, #ffd700, #ffb347);
+    color: #2c3e50;
+}
+
+.creator-profile-card {
+    border: none;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
+
+.creator-avatar {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.creator-avatar img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 4px solid #28a745;
+}
+
+.protection-indicator {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.protection-indicator.active {
+    background: #28a745;
+    animation: pulse 2s infinite;
+}
+
+.creator-name {
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.creator-stats {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+}
+
+.threat-level-indicator {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.threat-level.moderate {
+    background: rgba(255, 193, 7, 0.1);
+    border: 1px solid #ffc107;
+}
+
+.threat-level {
+    display: flex;
+    align-items: center;
+}
+
+.threat-icon {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: #ffc107;
+}
+
+.threat-status {
+    font-weight: 600;
+    color: #ffc107;
+    margin-bottom: 0.25rem;
+}
+
+.threat-description {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.protection-features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.feature-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.75rem;
+    border-radius: 8px;
+    background: #f8f9fa;
+    font-size: 0.8rem;
+    transition: all 0.3s ease;
+}
+
+.feature-item.active {
+    background: rgba(40, 167, 69, 0.1);
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.feature-item i {
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
+}
+
+.protection-metric {
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    color: white;
+    height: 100%;
+}
+
+.protection-metric:hover {
+    transform: translateY(-3px);
+}
+
+.protection-metric.threats-blocked {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.protection-metric.positive-engagement {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.protection-metric.fake-accounts {
+    background: linear-gradient(135deg, #6f42c1, #59359a);
+}
+
+.protection-metric.support-interventions {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+}
+
+.threat-stream {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.threat-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.threat-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.threat-item.priority-high {
+    background: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+}
+
+.threat-item.priority-medium {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #ffc107;
+}
+
+.priority-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.priority-badge.high {
+    background: #dc3545;
+    animation: pulse 2s infinite;
+}
+
+.priority-badge.medium {
+    background: #ffc107;
+    color: #212529;
+}
+
+.threat-type {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.system-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+    transition: all 0.3s ease;
+}
+
+.system-item.active {
+    background: rgba(40, 167, 69, 0.1);
+    border: 1px solid #28a745;
+}
+
+.system-icon {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+    color: #6c757d;
+}
+
+.system-item.active .system-icon {
+    color: #28a745;
+}
+
+.system-info {
+    flex-grow: 1;
+}
+
+.system-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.system-status {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.toggle-switch {
+    width: 40px;
+    height: 20px;
+    border-radius: 10px;
+    background: #dee2e6;
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.toggle-switch.active {
+    background: #28a745;
+}
+
+.toggle-switch::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: white;
+    transition: all 0.3s ease;
+}
+
+.toggle-switch.active::after {
+    left: 22px;
+}
+
+.support-item {
+    padding: 1rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: flex-start;
+}
+
+.support-icon {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+.support-info {
+    flex-grow: 1;
+}
+
+.support-info h6 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.platform-protection-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+.platform-card {
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.platform-card:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.platform-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.platform-icon {
+    margin-right: 1rem;
+    font-size: 2rem;
+}
+
+.platform-card.instagram .platform-icon {
+    color: #e4405f;
+}
+
+.platform-card.youtube .platform-icon {
+    color: #ff0000;
+}
+
+.platform-card.twitter .platform-icon {
+    color: #1da1f2;
+}
+
+.platform-card.tiktok .platform-icon {
+    color: #000000;
+}
+
+.platform-info {
+    flex-grow: 1;
+}
+
+.platform-info h6 {
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+}
+
+.platform-followers {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.protection-status {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+.protection-status.high {
+    background: #28a745;
+}
+
+.protection-status.medium {
+    background: #ffc107;
+}
+
+.platform-metrics {
+    margin-bottom: 1rem;
+}
+
+.platform-metrics .metric {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.85rem;
+}
+
+.metric-label {
+    color: #6c757d;
+}
+
+.metric-value {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.emergency-tools .card-header {
+    background: #dc3545 !important;
+}
+
+.emergency-tool {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.emergency-tool .tool-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.emergency-tool .tool-content {
+    flex-grow: 1;
+}
+
+.emergency-tool .tool-content h6 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.wellbeing-score {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.score-circle {
+    position: relative;
+    display: inline-block;
+}
+
+.score-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.score-value {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #28a745;
+}
+
+.score-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.factor-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.factor-label {
+    width: 120px;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.factor-bar {
+    flex-grow: 1;
+    height: 8px;
+    background: #e9ecef;
+    border-radius: 4px;
+    overflow: hidden;
+    margin: 0 0.5rem;
+}
+
+.factor-fill {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.5s ease;
+}
+
+.factor-fill.high {
+    background: #28a745;
+}
+
+.factor-fill.good {
+    background: #17a2b8;
+}
+
+.factor-fill.moderate {
+    background: #ffc107;
+}
+
+.factor-value {
+    width: 60px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.wellbeing-recommendations h6 {
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    color: #2c3e50;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Well-being Chart
+const wellbeingCtx = document.getElementById('wellbeingChart').getContext('2d');
+const wellbeingChart = new Chart(wellbeingCtx, {
+    type: 'doughnut',
+    data: {
+        datasets: [{
+            data: [73, 27],
+            backgroundColor: ['#28a745', '#e9ecef'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: false,
+        plugins: {
+            legend: {
+                display: false
+            }
+        },
+        cutout: '75%'
+    }
+});
+
+// Emergency button handlers
+function activatePanicMode() {
+    if (confirm('Are you sure you want to activate PANIC MODE? This will enable maximum protection across all platforms.')) {
+        console.log('PANIC MODE ACTIVATED');
+        alert('PANIC MODE ACTIVATED\n\n• All platforms set to maximum protection\n• Comments pre-approval enabled\n• Crisis team notified\n• Emergency contacts alerted');
+        
+        // Update UI to show panic mode is active
+        document.querySelector('.protection-status .status-text').textContent = 'PANIC MODE ACTIVE';
+        document.querySelector('.protection-status .status-text').style.color = '#dc3545';
+        document.querySelector('.protection-status .status-indicator').style.background = '#dc3545';
+    }
+}
+
+function callCrisisHotline() {
+    console.log('Connecting to crisis hotline');
+    alert('Connecting you to crisis support...\n\nIf this is a real emergency, please also contact:\n• Local emergency services: 911\n• Crisis Text Line: Text HOME to 741741');
+}
+
+function requestLegalHelp() {
+    console.log('Requesting emergency legal consultation');
+    alert('Legal emergency request submitted.\n\nA cybersecurity attorney will contact you within 30 minutes.\n\nPlease document any evidence and do not respond to the threats.');
+}
+
+// Protection system toggles
+document.querySelectorAll('.toggle-switch').forEach(toggle => {
+    toggle.addEventListener('click', function() {
+        const systemItem = this.closest('.system-item');
+        const systemName = systemItem.querySelector('.system-name').textContent;
+        
+        if (this.classList.contains('active')) {
+            this.classList.remove('active');
+            systemItem.classList.remove('active');
+            console.log(`${systemName} disabled`);
+        } else {
+            this.classList.add('active');
+            systemItem.classList.add('active');
+            console.log(`${systemName} enabled`);
+        }
+    });
+});
+
+// Threat action handlers
+function reportThreat(threatId, action) {
+    console.log(`Action: ${action} for threat: ${threatId}`);
+    
+    const actions = {
+        'mass_report': 'Mass reporting initiated across all platforms',
+        'legal_action': 'Legal team notified. Evidence collection started',
+        'crisis_support': 'Crisis counselor will contact you within 5 minutes',
+        'mass_filter': 'All hostile comments filtered and blocked',
+        'boost_support': 'Positive comments are being prioritized and boosted',
+        'community_rally': 'Your support community has been notified'
+    };
+    
+    alert(actions[action] || 'Action completed successfully');
+}
+
+// Support network connections
+function connectToCounselor() {
+    console.log('Connecting to mental health counselor');
+    alert('Connecting you to Dr. Sarah Johnson...\n\nShe specializes in online harassment trauma and is available 24/7 for creator support.');
+}
+
+function scheduleLegalCall() {
+    console.log('Scheduling legal consultation');
+    alert('Legal consultation scheduled.\n\nYour cybersecurity attorney will call you within 2 hours to discuss protection strategies.');
+}
+
+function joinPeerSupport() {
+    console.log('Joining peer support group');
+    alert('Welcome to the Creator Support Network!\n\nYou now have access to:\n• 24/7 peer support chat\n• Weekly group sessions\n• Mentor matching program');
+}
+
+// Real-time updates simulation
+setInterval(() => {
+    // Update threat count
+    const threatCount = document.querySelector('.active-threats');
+    const current = parseInt(threatCount.textContent.match(/\d+/)[0]);
+    const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+    const newCount = Math.max(0, current + variation);
+    threatCount.textContent = `${newCount} Active Threats`;
+    
+    // Update metrics
+    document.querySelectorAll('.metric-number').forEach(metric => {
+        if (!metric.textContent.includes('%')) {
+            const current = parseInt(metric.textContent);
+            const variation = Math.floor(Math.random() * 5) - 2;
+            const newValue = Math.max(0, current + variation);
+            metric.textContent = newValue;
+        }
+    });
+    
+    // Update well-being score occasionally
+    if (Math.random() < 0.1) {
+        const scoreElement = document.querySelector('.score-value');
+        const currentScore = parseInt(scoreElement.textContent);
+        const scoreChange = Math.floor(Math.random() * 6) - 3; // -3 to +3
+        const newScore = Math.max(0, Math.min(100, currentScore + scoreChange));
+        scoreElement.textContent = newScore;
+        
+        // Update chart
+        wellbeingChart.data.datasets[0].data = [newScore, 100 - newScore];
+        wellbeingChart.update();
+        
+        // Update color based on score
+        if (newScore >= 80) {
+            scoreElement.style.color = '#28a745';
+            document.querySelector('.score-label').textContent = 'Excellent';
+        } else if (newScore >= 60) {
+            scoreElement.style.color = '#17a2b8';
+            document.querySelector('.score-label').textContent = 'Good';
+        } else if (newScore >= 40) {
+            scoreElement.style.color = '#ffc107';
+            document.querySelector('.score-label').textContent = 'Fair';
+        } else {
+            scoreElement.style.color = '#dc3545';
+            document.querySelector('.score-label').textContent = 'Concerning';
+        }
+    }
+}, 15000); // Update every 15 seconds
+
+// Add event listeners for emergency buttons
+document.addEventListener('DOMContentLoaded', function() {
+    // Emergency buttons
+    const panicButton = document.querySelector('button:contains("ACTIVATE PANIC MODE")');
+    if (panicButton) {
+        panicButton.addEventListener('click', activatePanicMode);
+    }
+    
+    console.log('Creator Protection Center initialized');
+});
+</script>
+{% endblock %}

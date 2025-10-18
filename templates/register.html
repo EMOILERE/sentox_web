@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+
+{% block title %}Register - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+        <div class="card">
+            <div class="card-header text-center">
+                <h4 class="mb-0">
+                    <i class="fas fa-user-plus me-2"></i>User Registration
+                </h4>
+                <small class="text-muted">Create a new account to experience AI moderation services</small>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="registerForm">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">
+                            <i class="fas fa-user me-2"></i>Username <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" class="form-control" id="username" name="username" required 
+                               minlength="3" maxlength="20">
+                        <div class="form-text">3-20 characters, supports letters, numbers, underscores</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="email" class="form-label">
+                            <i class="fas fa-envelope me-2"></i>Email Address <span class="text-danger">*</span>
+                        </label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                        <div class="form-text">For receiving important notifications and password reset</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="password" class="form-label">
+                            <i class="fas fa-lock me-2"></i>Password <span class="text-danger">*</span>
+                        </label>
+                        <input type="password" class="form-control" id="password" name="password" required 
+                               minlength="6">
+                        <div class="form-text">At least 6 characters</div>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">
+                            <i class="fas fa-lock me-2"></i>Confirm Password <span class="text-danger">*</span>
+                        </label>
+                        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+                        <div id="passwordMatch" class="form-text"></div>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="agree_terms" required>
+                        <label class="form-check-label" for="agree_terms">
+                            I have read and agree to the <a href="#" data-bs-toggle="modal" data-bs-target="#termsModal">Terms of Service</a> and <a href="#" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a>
+                        </label>
+                    </div>
+                    
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" id="newsletter">
+                        <label class="form-check-label" for="newsletter">
+                            Receive product updates and technical news (optional)
+                        </label>
+                    </div>
+                    
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary" id="submitBtn">
+                            <i class="fas fa-user-plus me-2"></i>Create Account
+                        </button>
+                    </div>
+                </form>
+                
+                <hr>
+                
+                <div class="text-center">
+                    <p class="mb-0">Already have an account?</p>
+                    <a href="{{ url_for('main.login') }}" class="btn btn-outline-primary">
+                        <i class="fas fa-sign-in-alt me-2"></i>Sign In Now
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Features -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-star me-2"></i>After Registration You Can
+                </h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mb-0">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Use advanced AI moderation features
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        View detailed multi-agent analysis processes
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Access real-time monitoring dashboard
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Batch process content moderation
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        Get personalized data analytics
+                    </li>
+                    <li class="mb-0">
+                        <i class="fas fa-check text-success me-2"></i>
+                        API keys and developer tools
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Terms of Service Modal -->
+<div class="modal fade" id="termsModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Terms of Service</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Service Description</h6>
+                <p>SenTox AI Moderation Platform provides users with intelligent content moderation services based on multi-agent architecture.</p>
+                
+                <h6>2. Usage Guidelines</h6>
+                <ul>
+                    <li>Do not use this service for illegal activities</li>
+                    <li>Do not maliciously attack or interfere with normal system operation</li>
+                    <li>Do not distribute harmful, illegal or infringing content</li>
+                </ul>
+                
+                <h6>3. Data Security</h6>
+                <p>We are committed to protecting user data security. All moderated content is only used to provide services and will not be disclosed to third parties.</p>
+                
+                <h6>4. Disclaimer</h6>
+                <p>This service is provided based on AI technology. Moderation results are for reference only. Please combine human judgment for final decisions.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Privacy Policy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Privacy Policy</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <h6>1. Information Collection</h6>
+                <p>We collect the registration information you provide and data generated during your use of the service.</p>
+                
+                <h6>2. Information Usage</h6>
+                <ul>
+                    <li>Provide and improve service quality</li>
+                    <li>Send important notifications and updates</li>
+                    <li>Analyze user behavior to optimize the system</li>
+                </ul>
+                
+                <h6>3. Information Protection</h6>
+                <p>We adopt industry-standard security measures to protect your personal information, including encrypted storage, access control, etc.</p>
+                
+                <h6>4. Information Sharing</h6>
+                <p>Except as required by law, we will not share your personal information with third parties.</p>
+                
+                <h6>5. Cookie Usage</h6>
+                <p>We use cookies to provide a better user experience. You can manage cookies in your browser settings.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Password confirmation validation
+document.getElementById('confirm_password').addEventListener('input', function() {
+    const password = document.getElementById('password').value;
+    const confirmPassword = this.value;
+    const matchDiv = document.getElementById('passwordMatch');
+    
+    if (confirmPassword === '') {
+        matchDiv.textContent = '';
+        this.classList.remove('is-valid', 'is-invalid');
+    } else if (password === confirmPassword) {
+        matchDiv.textContent = 'Passwords match';
+        matchDiv.className = 'form-text text-success';
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+    } else {
+        matchDiv.textContent = 'Passwords do not match';
+        matchDiv.className = 'form-text text-danger';
+        this.classList.remove('is-valid');
+        this.classList.add('is-invalid');
+    }
+});
+
+// Username validation
+document.getElementById('username').addEventListener('input', function() {
+    const username = this.value;
+    const isValid = /^[a-zA-Z0-9_]{3,20}$/.test(username);
+    
+    if (username === '') {
+        this.classList.remove('is-valid', 'is-invalid');
+    } else if (isValid) {
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+    } else {
+        this.classList.remove('is-valid');
+        this.classList.add('is-invalid');
+    }
+});
+
+// Email validation
+document.getElementById('email').addEventListener('input', function() {
+    const email = this.value;
+    const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    
+    if (email === '') {
+        this.classList.remove('is-valid', 'is-invalid');
+    } else if (isValid) {
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+    } else {
+        this.classList.remove('is-valid');
+        this.classList.add('is-invalid');
+    }
+});
+
+// Form submission validation
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm_password').value;
+    const agreeTerms = document.getElementById('agree_terms').checked;
+    
+    if (password !== confirmPassword) {
+        e.preventDefault();
+        alert('The two passwords entered do not match');
+        return;
+    }
+    
+    if (!agreeTerms) {
+        e.preventDefault();
+        alert('Please read and agree to the Terms of Service and Privacy Policy');
+        return;
+    }
+    
+    // Show loading state
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating account...';
+});
+</script>
+{% endblock %}

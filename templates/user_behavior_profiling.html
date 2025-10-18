@@ -1,0 +1,771 @@
+{% extends "base.html" %}
+
+{% block title %}User Behavior Profiling - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="profiling-header py-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <h1 class="h2 mb-2">
+                <i class="fas fa-user-shield me-3"></i>
+                User Behavior Profiling & Risk Assessment
+            </h1>
+            <p class="text-muted mb-0">
+                Advanced AI-powered user behavior analysis to identify potential risks, repeat offenders, and promote positive community engagement
+            </p>
+        </div>
+        <div class="col-lg-4 text-end">
+            <div class="d-flex gap-2">
+                <button class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#searchUserModal">
+                    <i class="fas fa-search me-2"></i>Search User
+                </button>
+                <button class="btn btn-primary">
+                    <i class="fas fa-download me-2"></i>Export Report
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Risk Overview Dashboard -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="risk-metric-card high-risk">
+            <div class="metric-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">23</div>
+                <div class="metric-label">High Risk Users</div>
+                <div class="metric-trend">+3 this week</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="risk-metric-card medium-risk">
+            <div class="metric-icon">
+                <i class="fas fa-eye"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">147</div>
+                <div class="metric-label">Watch List</div>
+                <div class="metric-trend">-5 this week</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="risk-metric-card repeat-offender">
+            <div class="metric-icon">
+                <i class="fas fa-redo"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">78</div>
+                <div class="metric-label">Repeat Offenders</div>
+                <div class="metric-trend">-12 this week</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="risk-metric-card positive-contributor">
+            <div class="metric-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">2,847</div>
+                <div class="metric-label">Positive Contributors</div>
+                <div class="metric-trend">+94 this week</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User Risk Analysis -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-users me-2"></i>High-Risk User Analysis
+                </h5>
+                <div class="btn-group btn-group-sm">
+                    <button class="btn btn-outline-secondary active" data-risk="high">High Risk</button>
+                    <button class="btn btn-outline-secondary" data-risk="medium">Medium Risk</button>
+                    <button class="btn btn-outline-secondary" data-risk="watch">Watch List</button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="user-profiles-list">
+                    <!-- High Risk User 1 -->
+                    <div class="user-profile-item high-risk">
+                        <div class="user-avatar">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23dc3545'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='40' fill='white'%3EH%3C/text%3E%3C/svg%3E" alt="User">
+                            <div class="risk-badge high">H</div>
+                        </div>
+                        <div class="user-info">
+                            <div class="user-header">
+                                <h6 class="user-name">@hostile_commenter_47</h6>
+                                <span class="risk-score">Risk Score: 94/100</span>
+                            </div>
+                            <div class="user-stats">
+                                <span class="stat">47 violations</span>
+                                <span class="stat">23% toxic rate</span>
+                                <span class="stat">Active since: 2 weeks</span>
+                            </div>
+                            <div class="behavior-tags">
+                                <span class="behavior-tag harassment">Harassment</span>
+                                <span class="behavior-tag hate-speech">Hate Speech</span>
+                                <span class="behavior-tag coordinated">Coordinated Attack</span>
+                            </div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn btn-sm btn-outline-info" onclick="viewUserProfile('@hostile_commenter_47')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning" onclick="flagUser('@hostile_commenter_47')">
+                                <i class="fas fa-flag"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="blockUser('@hostile_commenter_47')">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- High Risk User 2 -->
+                    <div class="user-profile-item high-risk">
+                        <div class="user-avatar">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23dc3545'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='40' fill='white'%3ET%3C/text%3E%3C/svg%3E" alt="User">
+                            <div class="risk-badge high">H</div>
+                        </div>
+                        <div class="user-info">
+                            <div class="user-header">
+                                <h6 class="user-name">@troll_account_99</h6>
+                                <span class="risk-score">Risk Score: 91/100</span>
+                            </div>
+                            <div class="user-stats">
+                                <span class="stat">62 violations</span>
+                                <span class="stat">31% toxic rate</span>
+                                <span class="stat">Active since: 1 month</span>
+                            </div>
+                            <div class="behavior-tags">
+                                <span class="behavior-tag trolling">Trolling</span>
+                                <span class="behavior-tag spam">Spam</span>
+                                <span class="behavior-tag impersonation">Impersonation</span>
+                            </div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn btn-sm btn-outline-info" onclick="viewUserProfile('@troll_account_99')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning" onclick="flagUser('@troll_account_99')">
+                                <i class="fas fa-flag"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger" onclick="blockUser('@troll_account_99')">
+                                <i class="fas fa-ban"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Medium Risk User -->
+                    <div class="user-profile-item medium-risk">
+                        <div class="user-avatar">
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%23ffc107'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='40' fill='white'%3EM%3C/text%3E%3C/svg%3E" alt="User">
+                            <div class="risk-badge medium">M</div>
+                        </div>
+                        <div class="user-info">
+                            <div class="user-header">
+                                <h6 class="user-name">@argumentative_user</h6>
+                                <span class="risk-score">Risk Score: 67/100</span>
+                            </div>
+                            <div class="user-stats">
+                                <span class="stat">12 violations</span>
+                                <span class="stat">8% toxic rate</span>
+                                <span class="stat">Active since: 3 months</span>
+                            </div>
+                            <div class="behavior-tags">
+                                <span class="behavior-tag argumentative">Argumentative</span>
+                                <span class="behavior-tag off-topic">Off-topic</span>
+                            </div>
+                        </div>
+                        <div class="user-actions">
+                            <button class="btn btn-sm btn-outline-info" onclick="viewUserProfile('@argumentative_user')">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-warning" onclick="warnUser('@argumentative_user')">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-3">
+                    <button class="btn btn-outline-primary">Load More Users</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-chart-pie me-2"></i>Risk Distribution
+                </h6>
+            </div>
+            <div class="card-body">
+                <canvas id="riskDistributionChart" height="200"></canvas>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-brain me-2"></i>AI Behavior Insights
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="insight-item">
+                    <div class="insight-icon text-danger">
+                        <i class="fas fa-exclamation-circle"></i>
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-title">Coordinated Attack Detected</div>
+                        <div class="insight-desc">5 accounts showing synchronized hostile behavior</div>
+                        <div class="insight-time">15 minutes ago</div>
+                    </div>
+                </div>
+                
+                <div class="insight-item">
+                    <div class="insight-icon text-warning">
+                        <i class="fas fa-trending-up"></i>
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-title">Escalating Behavior Pattern</div>
+                        <div class="insight-desc">User @problematic_44 showing increasing aggression</div>
+                        <div class="insight-time">1 hour ago</div>
+                    </div>
+                </div>
+                
+                <div class="insight-item">
+                    <div class="insight-icon text-success">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <div class="insight-content">
+                        <div class="insight-title">Positive Trend</div>
+                        <div class="insight-desc">Community toxicity decreased by 12%</div>
+                        <div class="insight-time">2 hours ago</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Behavior Analysis Tools -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-microscope me-2"></i>Advanced Behavior Analysis Tools
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="analysis-tool">
+                            <div class="tool-icon bg-primary">
+                                <i class="fas fa-network-wired"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h6>Network Analysis</h6>
+                                <p class="text-muted">Detect coordinated behavior and bot networks</p>
+                                <button class="btn btn-sm btn-outline-primary">Run Analysis</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-3">
+                        <div class="analysis-tool">
+                            <div class="tool-icon bg-info">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h6>Behavioral Trends</h6>
+                                <p class="text-muted">Track user behavior changes over time</p>
+                                <button class="btn btn-sm btn-outline-info">View Trends</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-3">
+                        <div class="analysis-tool">
+                            <div class="tool-icon bg-warning">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h6>Pattern Recognition</h6>
+                                <p class="text-muted">Identify recurring harmful patterns</p>
+                                <button class="btn btn-sm btn-outline-warning">Start Scan</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-3 mb-3">
+                        <div class="analysis-tool">
+                            <div class="tool-icon bg-success">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="tool-content">
+                                <h6>Intervention Planning</h6>
+                                <p class="text-muted">AI-suggested intervention strategies</p>
+                                <button class="btn btn-sm btn-outline-success">Get Suggestions</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- User Search Modal -->
+<div class="modal fade" id="searchUserModal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Search User Profile</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <input type="text" class="form-control" placeholder="Enter username or user ID" id="userSearchInput">
+                </div>
+                <div class="search-results" id="searchResults">
+                    <!-- Search results will appear here -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="searchUser()">Search</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.profiling-header {
+    background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(255, 193, 7, 0.1) 100%);
+    border-radius: 10px;
+    margin: -1rem -15px 0 -15px;
+    padding: 2rem 15px;
+}
+
+.risk-metric-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.risk-metric-card:hover {
+    transform: translateY(-3px);
+}
+
+.risk-metric-card.high-risk {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.risk-metric-card.medium-risk {
+    background: linear-gradient(135deg, #ffc107, #e0a800);
+}
+
+.risk-metric-card.repeat-offender {
+    background: linear-gradient(135deg, #fd7e14, #e8670e);
+}
+
+.risk-metric-card.positive-contributor {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.metric-icon {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+    opacity: 0.8;
+}
+
+.metric-content {
+    flex-grow: 1;
+}
+
+.metric-number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.25rem;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+    margin-bottom: 0.25rem;
+}
+
+.metric-trend {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+.user-profile-item {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.user-profile-item:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateX(5px);
+}
+
+.user-profile-item.high-risk {
+    border-left: 4px solid #dc3545;
+    background: rgba(220, 53, 69, 0.05);
+}
+
+.user-profile-item.medium-risk {
+    border-left: 4px solid #ffc107;
+    background: rgba(255, 193, 7, 0.05);
+}
+
+.user-avatar {
+    position: relative;
+    margin-right: 1rem;
+}
+
+.user-avatar img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.risk-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+}
+
+.risk-badge.high {
+    background: #dc3545;
+}
+
+.risk-badge.medium {
+    background: #ffc107;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.user-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.user-name {
+    margin: 0;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.risk-score {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #dc3545;
+}
+
+.user-stats {
+    margin-bottom: 0.75rem;
+}
+
+.user-stats .stat {
+    display: inline-block;
+    margin-right: 1rem;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.behavior-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.behavior-tag {
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: white;
+}
+
+.behavior-tag.harassment {
+    background: #dc3545;
+}
+
+.behavior-tag.hate-speech {
+    background: #6f42c1;
+}
+
+.behavior-tag.coordinated {
+    background: #fd7e14;
+}
+
+.behavior-tag.trolling {
+    background: #e83e8c;
+}
+
+.behavior-tag.spam {
+    background: #20c997;
+}
+
+.behavior-tag.impersonation {
+    background: #17a2b8;
+}
+
+.behavior-tag.argumentative {
+    background: #ffc107;
+    color: #212529;
+}
+
+.behavior-tag.off-topic {
+    background: #6c757d;
+}
+
+.user-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.insight-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    background: #f8f9fa;
+}
+
+.insight-icon {
+    margin-right: 1rem;
+    font-size: 1.2rem;
+}
+
+.insight-content {
+    flex-grow: 1;
+}
+
+.insight-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.insight-desc {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.25rem;
+}
+
+.insight-time {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+.analysis-tool {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.analysis-tool:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.tool-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.tool-content h6 {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.tool-content p {
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Risk Distribution Chart
+const riskCtx = document.getElementById('riskDistributionChart').getContext('2d');
+const riskChart = new Chart(riskCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['High Risk', 'Medium Risk', 'Watch List', 'Positive Contributors'],
+        datasets: [{
+            data: [23, 147, 78, 2847],
+            backgroundColor: ['#dc3545', '#ffc107', '#fd7e14', '#28a745'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    padding: 15,
+                    font: {
+                        size: 11
+                    }
+                }
+            }
+        }
+    }
+});
+
+// User interaction functions
+function viewUserProfile(username) {
+    console.log('Viewing profile for:', username);
+    // Here you would implement the actual profile viewing functionality
+    alert(`Viewing detailed profile for ${username}`);
+}
+
+function flagUser(username) {
+    console.log('Flagging user:', username);
+    if (confirm(`Are you sure you want to flag ${username} for review?`)) {
+        alert(`${username} has been flagged for manual review.`);
+    }
+}
+
+function blockUser(username) {
+    console.log('Blocking user:', username);
+    if (confirm(`Are you sure you want to block ${username}? This action will prevent them from commenting.`)) {
+        alert(`${username} has been blocked.`);
+    }
+}
+
+function warnUser(username) {
+    console.log('Warning user:', username);
+    if (confirm(`Send a warning message to ${username}?`)) {
+        alert(`Warning sent to ${username}.`);
+    }
+}
+
+function searchUser() {
+    const searchTerm = document.getElementById('userSearchInput').value;
+    const resultsContainer = document.getElementById('searchResults');
+    
+    if (!searchTerm.trim()) {
+        alert('Please enter a username to search');
+        return;
+    }
+    
+    // Simulate search results
+    resultsContainer.innerHTML = `
+        <div class="search-result-item">
+            <div class="d-flex align-items-center">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%236c757d'/%3E%3Ctext x='50' y='60' text-anchor='middle' font-size='40' fill='white'%3E${searchTerm.charAt(1) || 'U'}%3C/text%3E%3C/svg%3E" 
+                     width="40" height="40" class="rounded-circle me-3">
+                <div class="flex-grow-1">
+                    <h6 class="mb-1">${searchTerm}</h6>
+                    <small class="text-muted">Risk Score: ${Math.floor(Math.random() * 100)} | Last active: ${Math.floor(Math.random() * 24)} hours ago</small>
+                </div>
+                <button class="btn btn-sm btn-primary" onclick="viewUserProfile('${searchTerm}')">View Profile</button>
+            </div>
+        </div>
+    `;
+}
+
+// Risk filter functionality
+document.querySelectorAll('[data-risk]').forEach(button => {
+    button.addEventListener('click', function() {
+        document.querySelectorAll('[data-risk]').forEach(btn => btn.classList.remove('active'));
+        this.classList.add('active');
+        
+        const riskLevel = this.dataset.risk;
+        console.log('Filtering by risk level:', riskLevel);
+        
+        // Here you would implement the actual filtering logic
+        // For now, we'll just show a notification
+        const riskLabels = {
+            'high': 'High Risk Users',
+            'medium': 'Medium Risk Users',
+            'watch': 'Watch List Users'
+        };
+        
+        // You could update the user list based on the selected filter
+        // This is just a demonstration
+    });
+});
+
+// Simulate real-time updates
+setInterval(() => {
+    // Update risk metrics with small random changes
+    const metrics = document.querySelectorAll('.metric-number');
+    metrics.forEach(metric => {
+        const current = parseInt(metric.textContent.replace(/,/g, ''));
+        const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+        const newValue = Math.max(0, current + variation);
+        metric.textContent = newValue.toLocaleString();
+    });
+}, 30000); // Update every 30 seconds
+
+// Initialize tooltips if using Bootstrap
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize any tooltips or other interactive elements
+    console.log('User Behavior Profiling dashboard initialized');
+});
+</script>
+{% endblock %}

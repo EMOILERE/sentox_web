@@ -1,0 +1,590 @@
+{% extends "base.html" %}
+
+{% block title %}Client Hub - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section py-5 mb-5">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <h1 class="display-5 fw-bold text-primary mb-3">
+                <i class="fas fa-users-cog me-3"></i>
+                Client Integration Hub
+            </h1>
+            <p class="lead mb-4">
+                Seamlessly integrate SenTox AI moderation into your social media platform. 
+                Empower content creators with intelligent comment management and automated content filtering.
+            </p>
+            <div class="d-flex gap-3">
+                <a href="#api-integration" class="btn btn-primary btn-lg">
+                    <i class="fas fa-code me-2"></i>API Integration
+                </a>
+                <a href="#creator-tools" class="btn btn-outline-primary btn-lg">
+                    <i class="fas fa-tools me-2"></i>Creator Tools
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="text-center">
+                <div class="integration-icon">
+                    <i class="fas fa-network-wired"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Integration Options -->
+<div class="row mb-5">
+    <div class="col-12">
+        <h2 class="text-center mb-5">
+            <i class="fas fa-plug me-3"></i>Integration Solutions
+        </h2>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 integration-card">
+            <div class="card-body text-center">
+                <div class="integration-type-icon bg-primary">
+                    <i class="fas fa-code"></i>
+                </div>
+                <h5 class="card-title">REST API</h5>
+                <p class="card-text">
+                    Direct API integration for real-time content moderation with comprehensive documentation and SDKs.
+                </p>
+                <ul class="list-unstyled text-start">
+                    <li><i class="fas fa-check text-success me-2"></i>Real-time processing</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Batch operations</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Webhook support</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Rate limiting</li>
+                </ul>
+                <a href="#" class="btn btn-primary">Get API Key</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 integration-card">
+            <div class="card-body text-center">
+                <div class="integration-type-icon bg-info">
+                    <i class="fas fa-plug"></i>
+                </div>
+                <h5 class="card-title">WordPress Plugin</h5>
+                <p class="card-text">
+                    One-click installation for WordPress sites with automatic comment filtering and moderation queue.
+                </p>
+                <ul class="list-unstyled text-start">
+                    <li><i class="fas fa-check text-success me-2"></i>Easy installation</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Auto-moderation</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Admin dashboard</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Customizable rules</li>
+                </ul>
+                <a href="#" class="btn btn-info">Download Plugin</a>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4 mb-4">
+        <div class="card h-100 integration-card">
+            <div class="card-body text-center">
+                <div class="integration-type-icon bg-success">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h5 class="card-title">Mobile SDK</h5>
+                <p class="card-text">
+                    Native mobile SDKs for iOS and Android apps with offline caching and smart pre-filtering.
+                </p>
+                <ul class="list-unstyled text-start">
+                    <li><i class="fas fa-check text-success me-2"></i>iOS & Android</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Offline support</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Edge processing</li>
+                    <li><i class="fas fa-check text-success me-2"></i>Custom UI components</li>
+                </ul>
+                <a href="#" class="btn btn-success">Download SDK</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Creator Dashboard Preview -->
+<div class="row mb-5" id="creator-tools">
+    <div class="col-12">
+        <h2 class="text-center mb-5">
+            <i class="fas fa-star me-3"></i>Content Creator Dashboard
+        </h2>
+    </div>
+    
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-tachometer-alt me-2"></i>Live Comment Management
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card bg-success text-white">
+                            <div class="stat-number">1,247</div>
+                            <div class="stat-label">Approved Today</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card bg-danger text-white">
+                            <div class="stat-number">89</div>
+                            <div class="stat-label">Filtered Out</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card bg-warning text-white">
+                            <div class="stat-number">23</div>
+                            <div class="stat-label">Pending Review</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <div class="stat-card bg-info text-white">
+                            <div class="stat-number">94.2%</div>
+                            <div class="stat-label">Filter Accuracy</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <h6>Recent Activity</h6>
+                    <div class="activity-feed">
+                        <div class="activity-item">
+                            <div class="activity-icon bg-success">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-text">Comment auto-approved: "Great content! Love your videos!"</div>
+                                <div class="activity-time">2 minutes ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon bg-danger">
+                                <i class="fas fa-times"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-text">Toxic comment filtered: Contains harassment language</div>
+                                <div class="activity-time">5 minutes ago</div>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon bg-warning">
+                                <i class="fas fa-flag"></i>
+                            </div>
+                            <div class="activity-content">
+                                <div class="activity-text">Comment flagged for manual review: Ambiguous sentiment</div>
+                                <div class="activity-time">8 minutes ago</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-filter me-2"></i>Smart Filtering Rules
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="filter-rule">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="autoFilter" checked>
+                        <label class="form-check-label" for="autoFilter">
+                            Auto-filter toxic content
+                        </label>
+                    </div>
+                    <small class="text-muted">Automatically hide harmful comments</small>
+                </div>
+                
+                <div class="filter-rule">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="spamFilter" checked>
+                        <label class="form-check-label" for="spamFilter">
+                            Block spam and promotional content
+                        </label>
+                    </div>
+                    <small class="text-muted">Filter promotional and spam messages</small>
+                </div>
+                
+                <div class="filter-rule">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="positivityBoost">
+                        <label class="form-check-label" for="positivityBoost">
+                            Boost positive comments
+                        </label>
+                    </div>
+                    <small class="text-muted">Prioritize encouraging and positive feedback</small>
+                </div>
+                
+                <div class="filter-rule">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="keywordFilter">
+                        <label class="form-check-label" for="keywordFilter">
+                            Custom keyword filtering
+                        </label>
+                    </div>
+                    <small class="text-muted">Block specific words or phrases</small>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-heart me-2"></i>Community Health Score
+                </h6>
+            </div>
+            <div class="card-body text-center">
+                <div class="health-score">
+                    <div class="score-circle">
+                        <div class="score-number">87</div>
+                        <div class="score-label">Excellent</div>
+                    </div>
+                </div>
+                <p class="text-muted mt-3">
+                    Your community maintains a positive and healthy environment with high engagement and low toxicity.
+                </p>
+                <div class="health-metrics">
+                    <div class="metric">
+                        <span class="metric-label">Positivity:</span>
+                        <span class="metric-value text-success">92%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Engagement:</span>
+                        <span class="metric-value text-info">85%</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Safety:</span>
+                        <span class="metric-value text-warning">78%</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- API Documentation Preview -->
+<div class="row" id="api-integration">
+    <div class="col-12">
+        <h2 class="text-center mb-5">
+            <i class="fas fa-book me-3"></i>Quick Start Integration
+        </h2>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-code me-2"></i>Sample API Request
+                </h6>
+            </div>
+            <div class="card-body">
+                <pre><code class="language-javascript">// Moderate a single comment
+const response = await fetch('/api/moderate', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-API-Key': 'your-api-key'
+  },
+  body: JSON.stringify({
+    content: "This is a sample comment to moderate",
+    platform: "social_media",
+    user_id: "user123"
+  })
+});
+
+const result = await response.json();
+console.log(result.decision); // 'approved', 'rejected', or 'escalated'</code></pre>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-check me-2"></i>Sample API Response
+                </h6>
+            </div>
+            <div class="card-body">
+                <pre><code class="language-json">{
+  "request_id": "req_12345",
+  "status": "completed",
+  "result": {
+    "decision": "approved",
+    "confidence": 0.94,
+    "categories": ["positive", "engaging"],
+    "severity_level": 1,
+    "reasoning": "Comment shows positive sentiment..."
+  },
+  "processing_time": 0.45,
+  "model_version": "sentox-v1.0",
+  "agent_summary": {
+    "total_agents": 5,
+    "consensus_level": 0.96
+  }
+}</code></pre>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.hero-section {
+    background: linear-gradient(135deg, rgba(52, 152, 219, 0.1) 0%, rgba(155, 89, 182, 0.1) 100%);
+    border-radius: 15px;
+}
+
+.integration-icon {
+    width: 120px;
+    height: 120px;
+    background: linear-gradient(135deg, #3498db, #9b59b6);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-size: 3rem;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.integration-card {
+    transition: all 0.3s ease;
+    border: none;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.integration-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+}
+
+.integration-type-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 2rem;
+    color: white;
+}
+
+.stat-card {
+    padding: 1.5rem;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.activity-feed {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.activity-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.activity-icon {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.activity-content {
+    flex-grow: 1;
+}
+
+.activity-text {
+    font-size: 0.9rem;
+    margin-bottom: 0.25rem;
+}
+
+.activity-time {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.filter-rule {
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.health-score {
+    margin: 2rem 0;
+}
+
+.score-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #28a745, #20c997);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    color: white;
+    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
+}
+
+.score-number {
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.score-label {
+    font-size: 0.9rem;
+}
+
+.health-metrics {
+    margin-top: 1rem;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+}
+
+.metric-label {
+    font-weight: 500;
+}
+
+.metric-value {
+    font-weight: bold;
+}
+
+pre {
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 5px;
+    padding: 1rem;
+    font-size: 0.85rem;
+    overflow-x: auto;
+}
+
+code {
+    color: #d63384;
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Simulate real-time updates
+function updateStats() {
+    const stats = document.querySelectorAll('.stat-number');
+    stats.forEach(stat => {
+        const current = parseInt(stat.textContent);
+        const variation = Math.floor(Math.random() * 10) - 5;
+        const newValue = Math.max(0, current + variation);
+        stat.textContent = newValue;
+    });
+}
+
+// Update stats every 30 seconds
+setInterval(updateStats, 30000);
+
+// Simulate activity feed updates
+function addNewActivity() {
+    const activities = [
+        {
+            type: 'success',
+            icon: 'check',
+            text: 'Comment auto-approved: "Amazing work as always!"',
+            time: 'Just now'
+        },
+        {
+            type: 'danger',
+            icon: 'times',
+            text: 'Spam comment blocked: Promotional content detected',
+            time: 'Just now'
+        },
+        {
+            type: 'warning',
+            icon: 'flag',
+            text: 'Comment needs review: Borderline content detected',
+            time: 'Just now'
+        }
+    ];
+    
+    const randomActivity = activities[Math.floor(Math.random() * activities.length)];
+    
+    const activityFeed = document.querySelector('.activity-feed');
+    const newActivity = document.createElement('div');
+    newActivity.className = 'activity-item';
+    newActivity.innerHTML = `
+        <div class="activity-icon bg-${randomActivity.type}">
+            <i class="fas fa-${randomActivity.icon}"></i>
+        </div>
+        <div class="activity-content">
+            <div class="activity-text">${randomActivity.text}</div>
+            <div class="activity-time">${randomActivity.time}</div>
+        </div>
+    `;
+    
+    activityFeed.insertBefore(newActivity, activityFeed.firstChild);
+    
+    // Remove old activities to keep the list manageable
+    const activities_list = activityFeed.querySelectorAll('.activity-item');
+    if (activities_list.length > 10) {
+        activities_list[activities_list.length - 1].remove();
+    }
+}
+
+// Add new activity every 45 seconds
+setInterval(addNewActivity, 45000);
+
+// Health score animation
+document.addEventListener('DOMContentLoaded', function() {
+    const healthScore = document.querySelector('.score-number');
+    let currentScore = 0;
+    const targetScore = 87;
+    
+    const animateScore = () => {
+        if (currentScore < targetScore) {
+            currentScore++;
+            healthScore.textContent = currentScore;
+            setTimeout(animateScore, 30);
+        }
+    };
+    
+    setTimeout(animateScore, 500);
+});
+</script>
+{% endblock %}

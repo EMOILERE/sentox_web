@@ -1,0 +1,420 @@
+{% extends "base.html" %}
+
+{% block title %}内容审核提交 - SenTox AI审核平台{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">
+                    <i class="fas fa-upload me-2"></i>智能内容审核
+                </h4>
+                <small class="text-muted">基于多智能体架构的高精度内容安全检测</small>
+            </div>
+            <div class="card-body">
+                <form method="POST" id="contentForm">
+                    <div class="mb-4">
+                        <label for="content" class="form-label">
+                            <i class="fas fa-edit me-2"></i>待审核内容
+                        </label>
+                        <textarea class="form-control" id="content" name="content" rows="8" 
+                                placeholder="请输入需要审核的文本内容...&#10;&#10;支持的内容类型：&#10;• 社交媒体评论&#10;• 用户生成内容&#10;• 论坛帖子&#10;• 商品评价&#10;• 其他文本内容" 
+                                required></textarea>
+                        <div class="form-text d-flex justify-content-between">
+                            <span>
+                                <i class="fas fa-info-circle me-1"></i>
+                                内容将通过多个AI智能体进行协作分析
+                            </span>
+                            <span id="charCount" class="text-muted">0 / 5000</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="platform" class="form-label">
+                            <i class="fas fa-globe me-2"></i>来源平台
+                        </label>
+                        <select class="form-select" id="platform" name="platform">
+                            <option value="web">Web平台</option>
+                            <option value="weibo">微博</option>
+                            <option value="douyin">抖音</option>
+                            <option value="wechat">微信</option>
+                            <option value="zhihu">知乎</option>
+                            <option value="bilibili">哔哩哔哩</option>
+                            <option value="xiaohongshu">小红书</option>
+                            <option value="other">其他</option>
+                        </select>
+                        <div class="form-text">
+                            选择内容来源平台，系统将根据不同平台特性进行优化审核
+                        </div>
+                    </div>
+                    
+                    <!-- 审核选项 -->
+                    <div class="mb-4">
+                        <h6>
+                            <i class="fas fa-cog me-2"></i>审核配置
+                        </h6>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="deepAnalysis" checked>
+                                    <label class="form-check-label" for="deepAnalysis">
+                                        深度推理分析
+                                        <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" 
+                                           title="启用推理智能体进行深层语义分析"></i>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="contextAnalysis" checked>
+                                    <label class="form-check-label" for="contextAnalysis">
+                                        上下文理解
+                                        <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" 
+                                           title="分析内容的潜在含义和文化背景"></i>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="multiAgent" checked>
+                                    <label class="form-check-label" for="multiAgent">
+                                        多智能体协作
+                                        <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" 
+                                           title="启用多个专业智能体协同决策"></i>
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="showThinking">
+                                    <label class="form-check-label" for="showThinking">
+                                        显示思维过程
+                                        <i class="fas fa-info-circle ms-1" data-bs-toggle="tooltip" 
+                                           title="展示AI的推理思维链"></i>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+                                <i class="fas fa-brain me-2"></i>开始AI审核
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary ms-2" onclick="clearForm()">
+                                <i class="fas fa-eraser me-1"></i>清空
+                            </button>
+                        </div>
+                        <div class="text-muted">
+                            <small>
+                                <i class="fas fa-clock me-1"></i>
+                                预估处理时间：2-5秒
+                            </small>
+                        </div>
+                    </div>
+                </form>
+                
+                <!-- 处理进度 -->
+                <div id="processingIndicator" class="mt-4" style="display: none;">
+                    <div class="card border-info">
+                        <div class="card-body">
+                            <h6 class="card-title">
+                                <i class="fas fa-spinner fa-spin me-2"></i>
+                                AI智能体正在协作分析...
+                            </h6>
+                            <div class="progress mb-3">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                                     role="progressbar" style="width: 0%"></div>
+                            </div>
+                            <div id="processingSteps">
+                                <div class="processing-step">
+                                    <i class="fas fa-circle text-muted me-2"></i>
+                                    <span class="text-muted">初始化多智能体系统...</span>
+                                </div>
+                                <div class="processing-step">
+                                    <i class="fas fa-circle text-muted me-2"></i>
+                                    <span class="text-muted">SenTox-GLDA模型预分类...</span>
+                                </div>
+                                <div class="processing-step">
+                                    <i class="fas fa-circle text-muted me-2"></i>
+                                    <span class="text-muted">推理智能体深度分析...</span>
+                                </div>
+                                <div class="processing-step">
+                                    <i class="fas fa-circle text-muted me-2"></i>
+                                    <span class="text-muted">协调智能体综合决策...</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 示例内容 -->
+        <div class="card mt-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-lightbulb me-2"></i>示例内容
+                </h6>
+            </div>
+            <div class="card-body">
+                <p class="card-text mb-3">点击以下示例快速体验审核功能：</p>
+                <div class="row">
+                    <div class="col-md-4 mb-2">
+                        <button type="button" class="btn btn-outline-success btn-sm w-100" 
+                                onclick="loadExample('positive')">
+                            <i class="fas fa-thumbs-up me-1"></i>正面评价示例
+                        </button>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <button type="button" class="btn btn-outline-warning btn-sm w-100" 
+                                onclick="loadExample('ambiguous')">
+                            <i class="fas fa-question-circle me-1"></i>歧义内容示例
+                        </button>
+                    </div>
+                    <div class="col-md-4 mb-2">
+                        <button type="button" class="btn btn-outline-danger btn-sm w-100" 
+                                onclick="loadExample('toxic')">
+                            <i class="fas fa-exclamation-triangle me-1"></i>有害内容示例
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 侧边栏信息 -->
+    <div class="col-lg-4">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-info-circle me-2"></i>审核流程
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-primary"></div>
+                        <div class="timeline-content">
+                            <h6>1. 初步分类</h6>
+                            <p class="text-muted small">SenTox-GLDA模型进行快速二分类</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-info"></div>
+                        <div class="timeline-content">
+                            <h6>2. 深度推理</h6>
+                            <p class="text-muted small">推理智能体分析语义和上下文</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-warning"></div>
+                        <div class="timeline-content">
+                            <h6>3. 协调决策</h6>
+                            <p class="text-muted small">协调智能体综合各方意见</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker bg-success"></div>
+                        <div class="timeline-content">
+                            <h6>4. 输出结果</h6>
+                            <p class="text-muted small">生成详细的审核报告</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card mt-4">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-shield-alt me-2"></i>检测能力
+                </h6>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        仇恨言论识别
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        暴力威胁检测
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        骚扰辱骂过滤
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        色情内容拦截
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        虚假信息识别
+                    </li>
+                    <li class="mb-2">
+                        <i class="fas fa-check text-success me-2"></i>
+                        垃圾广告过滤
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.timeline {
+    position: relative;
+    padding-left: 30px;
+}
+
+.timeline::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: #dee2e6;
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.timeline-marker {
+    position: absolute;
+    left: -23px;
+    top: 0;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 0 0 2px #dee2e6;
+}
+
+.timeline-content h6 {
+    margin-bottom: 5px;
+    color: #495057;
+}
+
+.processing-step {
+    margin-bottom: 10px;
+    transition: all 0.3s ease;
+}
+
+.processing-step.active i {
+    color: #007bff !important;
+    animation: pulse 1.5s infinite;
+}
+
+.processing-step.completed i {
+    color: #28a745 !important;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+const examples = {
+    positive: "这个产品真的很棒！质量超出预期，服务态度也很好，强烈推荐给大家。物流很快，包装也很仔细，是一次非常满意的购物体验。",
+    ambiguous: "这个设计真是太有创意了，让人印象深刻。虽然可能不是所有人都能接受这种风格，但我觉得挺有意思的。",
+    toxic: "这种垃圾产品就是骗钱的，卖家态度恶劣，强烈建议大家不要购买，完全就是浪费钱。"
+};
+
+// 字符计数
+document.getElementById('content').addEventListener('input', function() {
+    const length = this.value.length;
+    const counter = document.getElementById('charCount');
+    counter.textContent = length + ' / 5000';
+    
+    if (length > 5000) {
+        counter.classList.add('text-danger');
+        this.classList.add('is-invalid');
+    } else {
+        counter.classList.remove('text-danger');
+        this.classList.remove('is-invalid');
+    }
+});
+
+// 加载示例
+function loadExample(type) {
+    document.getElementById('content').value = examples[type];
+    document.getElementById('content').dispatchEvent(new Event('input'));
+}
+
+// 清空表单
+function clearForm() {
+    document.getElementById('contentForm').reset();
+    document.getElementById('charCount').textContent = '0 / 5000';
+}
+
+// 处理表单提交
+document.getElementById('contentForm').addEventListener('submit', function(e) {
+    const content = document.getElementById('content').value.trim();
+    
+    if (!content) {
+        e.preventDefault();
+        alert('请输入要审核的内容');
+        return;
+    }
+    
+    if (content.length > 5000) {
+        e.preventDefault();
+        alert('内容长度不能超过5000字符');
+        return;
+    }
+    
+    // 显示处理进度
+    showProcessingIndicator();
+});
+
+function showProcessingIndicator() {
+    document.getElementById('processingIndicator').style.display = 'block';
+    document.getElementById('submitBtn').disabled = true;
+    
+    // 模拟处理进度
+    const progressBar = document.querySelector('.progress-bar');
+    const steps = document.querySelectorAll('.processing-step');
+    let currentStep = 0;
+    
+    const progressInterval = setInterval(() => {
+        const progress = ((currentStep + 1) / steps.length) * 100;
+        progressBar.style.width = progress + '%';
+        
+        if (currentStep > 0) {
+            steps[currentStep - 1].classList.remove('active');
+            steps[currentStep - 1].classList.add('completed');
+            steps[currentStep - 1].querySelector('i').className = 'fas fa-check-circle text-success me-2';
+        }
+        
+        if (currentStep < steps.length) {
+            steps[currentStep].classList.add('active');
+            steps[currentStep].querySelector('span').classList.remove('text-muted');
+        }
+        
+        currentStep++;
+        
+        if (currentStep > steps.length) {
+            clearInterval(progressInterval);
+        }
+    }, 1000);
+}
+
+// 工具提示初始化
+document.addEventListener('DOMContentLoaded', function() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+</script>
+{% endblock %}

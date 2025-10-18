@@ -1,0 +1,1002 @@
+{% extends "base.html" %}
+
+{% block title %}Anti-Cyberbullying Protection Center - SenTox AI Moderation Platform{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="protection-header py-4 mb-4">
+    <div class="row align-items-center">
+        <div class="col-lg-8">
+            <h1 class="h2 mb-2">
+                <i class="fas fa-shield-heart me-3"></i>
+                Anti-Cyberbullying Protection Center
+            </h1>
+            <p class="text-muted mb-0">
+                Advanced AI-powered cyberbullying detection, prevention, and intervention system to create safer online communities
+            </p>
+        </div>
+        <div class="col-lg-4 text-end">
+            <div class="protection-status">
+                <div class="status-indicator active"></div>
+                <span class="status-text">Protection Active</span>
+                <button class="btn btn-outline-primary btn-sm ms-2">
+                    <i class="fas fa-cog"></i> Configure
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Protection Overview -->
+<div class="row mb-4">
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="protection-metric-card incidents-blocked">
+            <div class="metric-icon">
+                <i class="fas fa-shield-check"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">247</div>
+                <div class="metric-label">Incidents Blocked Today</div>
+                <div class="metric-change positive">-23% vs yesterday</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="protection-metric-card victims-protected">
+            <div class="metric-icon">
+                <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">89</div>
+                <div class="metric-label">Users Protected</div>
+                <div class="metric-change positive">+12% vs yesterday</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="protection-metric-card interventions">
+            <div class="metric-icon">
+                <i class="fas fa-hands-helping"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">34</div>
+                <div class="metric-label">Active Interventions</div>
+                <div class="metric-change neutral">+2 ongoing</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-3 col-md-6 mb-3">
+        <div class="protection-metric-card prevention-rate">
+            <div class="metric-icon">
+                <i class="fas fa-percentage"></i>
+            </div>
+            <div class="metric-content">
+                <div class="metric-number">94.7%</div>
+                <div class="metric-label">Prevention Success</div>
+                <div class="metric-change positive">+1.2% this week</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Real-time Incident Detection -->
+<div class="row mb-4">
+    <div class="col-lg-8">
+        <div class="card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                    <i class="fas fa-exclamation-triangle me-2"></i>Live Incident Detection
+                </h5>
+                <div class="incident-controls">
+                    <span class="incident-count">3 Active Incidents</span>
+                    <button class="btn btn-sm btn-outline-danger ms-2">
+                        <i class="fas fa-bell"></i> Alert All
+                    </button>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="incident-stream">
+                    <!-- High Severity Incident -->
+                    <div class="incident-item severity-high">
+                        <div class="incident-indicator">
+                            <div class="severity-badge high">HIGH</div>
+                            <div class="incident-type">Coordinated Harassment</div>
+                        </div>
+                        <div class="incident-details">
+                            <div class="incident-title">Multiple users targeting @young_creator_18</div>
+                            <div class="incident-description">
+                                5 accounts identified in coordinated attack. Patterns include:
+                                body-shaming, appearance-based harassment, persistent following across posts.
+                            </div>
+                            <div class="incident-meta">
+                                <span class="incident-time">Started 23 minutes ago</span>
+                                <span class="incident-participants">5 attackers identified</span>
+                                <span class="incident-platform">Instagram, TikTok</span>
+                            </div>
+                            <div class="victim-impact">
+                                <i class="fas fa-heart-broken text-danger me-1"></i>
+                                <span class="impact-level">High emotional distress detected</span>
+                            </div>
+                        </div>
+                        <div class="incident-actions">
+                            <button class="btn btn-sm btn-danger">
+                                <i class="fas fa-ban"></i> Auto-Block All
+                            </button>
+                            <button class="btn btn-sm btn-warning">
+                                <i class="fas fa-user-shield"></i> Protect Victim
+                            </button>
+                            <button class="btn btn-sm btn-info">
+                                <i class="fas fa-eye"></i> Monitor
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Medium Severity Incident -->
+                    <div class="incident-item severity-medium">
+                        <div class="incident-indicator">
+                            <div class="severity-badge medium">MEDIUM</div>
+                            <div class="incident-type">Persistent Harassment</div>
+                        </div>
+                        <div class="incident-details">
+                            <div class="incident-title">Repeated targeting of @content_creator_pro</div>
+                            <div class="incident-description">
+                                Single user @persistent_hater making repeated hostile comments
+                                across multiple posts over 3 days.
+                            </div>
+                            <div class="incident-meta">
+                                <span class="incident-time">Ongoing for 3 days</span>
+                                <span class="incident-participants">1 primary attacker</span>
+                                <span class="incident-platform">YouTube</span>
+                            </div>
+                            <div class="victim-impact">
+                                <i class="fas fa-frown text-warning me-1"></i>
+                                <span class="impact-level">Moderate stress indicators</span>
+                            </div>
+                        </div>
+                        <div class="incident-actions">
+                            <button class="btn btn-sm btn-warning">
+                                <i class="fas fa-exclamation-triangle"></i> Warn User
+                            </button>
+                            <button class="btn btn-sm btn-secondary">
+                                <i class="fas fa-clock"></i> Timeout
+                            </button>
+                            <button class="btn btn-sm btn-info">
+                                <i class="fas fa-comment-medical"></i> Intervene
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Low Severity but Important -->
+                    <div class="incident-item severity-low">
+                        <div class="incident-indicator">
+                            <div class="severity-badge low">LOW</div>
+                            <div class="incident-type">Early Warning</div>
+                        </div>
+                        <div class="incident-details">
+                            <div class="incident-title">Potential escalation detected: @teen_artist_99</div>
+                            <div class="incident-description">
+                                AI detected conversation pattern that historically leads to bullying.
+                                Preventive intervention recommended.
+                            </div>
+                            <div class="incident-meta">
+                                <span class="incident-time">Risk identified 5 minutes ago</span>
+                                <span class="incident-participants">3 users in thread</span>
+                                <span class="incident-platform">Twitter</span>
+                            </div>
+                            <div class="victim-impact">
+                                <i class="fas fa-shield-alt text-info me-1"></i>
+                                <span class="impact-level">Preventive protection activated</span>
+                            </div>
+                        </div>
+                        <div class="incident-actions">
+                            <button class="btn btn-sm btn-success">
+                                <i class="fas fa-comments"></i> Moderate Thread
+                            </button>
+                            <button class="btn btn-sm btn-info">
+                                <i class="fas fa-eye"></i> Monitor
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="card mb-3">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-brain me-2"></i>AI Protection Insights
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="protection-insight">
+                    <div class="insight-icon bg-success">
+                        <i class="fas fa-trend-down"></i>
+                    </div>
+                    <div class="insight-content">
+                        <h6>Bullying Trend Decreasing</h6>
+                        <p class="small text-muted">Community-wide bullying incidents down 23% this week thanks to proactive interventions.</p>
+                    </div>
+                </div>
+                
+                <div class="protection-insight">
+                    <div class="insight-icon bg-warning">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="insight-content">
+                        <h6>Peak Risk Hours: 3-6 PM</h6>
+                        <p class="small text-muted">Increased monitoring during after-school hours when teen bullying peaks.</p>
+                    </div>
+                </div>
+                
+                <div class="protection-insight">
+                    <div class="insight-icon bg-info">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="insight-content">
+                        <h6>Vulnerable Group Protection</h6>
+                        <p class="small text-muted">Enhanced protection active for 47 users identified as high-risk targets.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-first-aid me-2"></i>Crisis Support Resources
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="crisis-resource">
+                    <div class="resource-icon">
+                        <i class="fas fa-phone text-danger"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h6>Crisis Hotline</h6>
+                        <p class="small mb-1">24/7 Support Available</p>
+                        <a href="tel:988" class="btn btn-sm btn-outline-danger">Call 988</a>
+                    </div>
+                </div>
+                
+                <div class="crisis-resource">
+                    <div class="resource-icon">
+                        <i class="fas fa-comments text-primary"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h6>Online Counseling</h6>
+                        <p class="small mb-1">Professional mental health support</p>
+                        <button class="btn btn-sm btn-outline-primary">Connect Now</button>
+                    </div>
+                </div>
+                
+                <div class="crisis-resource">
+                    <div class="resource-icon">
+                        <i class="fas fa-heart text-success"></i>
+                    </div>
+                    <div class="resource-info">
+                        <h6>Peer Support Groups</h6>
+                        <p class="small mb-1">Community support network</p>
+                        <button class="btn btn-sm btn-outline-success">Join Group</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Intervention Strategies -->
+<div class="row mb-4">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-cogs me-2"></i>Automated Intervention Strategies
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="intervention-strategy">
+                            <div class="strategy-icon bg-danger">
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            <div class="strategy-content">
+                                <h6>Immediate Block</h6>
+                                <p class="text-muted small">Instantly block users exhibiting severe bullying behavior</p>
+                                <div class="strategy-stats">
+                                    <span class="badge bg-danger">247 today</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="intervention-strategy">
+                            <div class="strategy-icon bg-warning">
+                                <i class="fas fa-shield-alt"></i>
+                            </div>
+                            <div class="strategy-content">
+                                <h6>Victim Protection</h6>
+                                <p class="text-muted small">Activate enhanced protection for targeted users</p>
+                                <div class="strategy-stats">
+                                    <span class="badge bg-warning">89 protected</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="intervention-strategy">
+                            <div class="strategy-icon bg-info">
+                                <i class="fas fa-comment-medical"></i>
+                            </div>
+                            <div class="strategy-content">
+                                <h6>Positive Reinforcement</h6>
+                                <p class="text-muted small">Promote positive comments and supportive messages</p>
+                                <div class="strategy-stats">
+                                    <span class="badge bg-info">156 boosted</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-3 col-md-6 mb-3">
+                        <div class="intervention-strategy">
+                            <div class="strategy-icon bg-success">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <div class="strategy-content">
+                                <h6>Educational Outreach</h6>
+                                <p class="text-muted small">Send educational content about cyberbullying effects</p>
+                                <div class="strategy-stats">
+                                    <span class="badge bg-success">43 reached</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bullying Pattern Analysis -->
+<div class="row mb-4">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-chart-line me-2"></i>Bullying Pattern Trends
+                </h6>
+            </div>
+            <div class="card-body">
+                <canvas id="bullyingTrendsChart" height="200"></canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h6 class="mb-0">
+                    <i class="fas fa-bullseye me-2"></i>Target Demographics
+                </h6>
+            </div>
+            <div class="card-body">
+                <div class="demographic-analysis">
+                    <div class="demo-item">
+                        <div class="demo-label">Age Groups Most Targeted</div>
+                        <div class="demo-bar">
+                            <div class="demo-segment teens" style="width: 45%">13-17 (45%)</div>
+                            <div class="demo-segment young-adults" style="width: 30%">18-24 (30%)</div>
+                            <div class="demo-segment adults" style="width: 25%">25+ (25%)</div>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-item">
+                        <div class="demo-label">Platform Distribution</div>
+                        <div class="demo-stats">
+                            <span class="demo-stat">Instagram: 35%</span>
+                            <span class="demo-stat">TikTok: 28%</span>
+                            <span class="demo-stat">Twitter: 22%</span>
+                            <span class="demo-stat">YouTube: 15%</span>
+                        </div>
+                    </div>
+                    
+                    <div class="demo-item">
+                        <div class="demo-label">Common Attack Vectors</div>
+                        <div class="attack-vectors">
+                            <span class="vector-tag appearance">Appearance (32%)</span>
+                            <span class="vector-tag identity">Identity (24%)</span>
+                            <span class="vector-tag content">Content Quality (21%)</span>
+                            <span class="vector-tag personal">Personal Life (23%)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Support and Recovery Tools -->
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="fas fa-heart me-2"></i>Victim Support & Recovery Tools
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-4 mb-3">
+                        <div class="support-tool">
+                            <div class="tool-header">
+                                <i class="fas fa-user-friends text-primary"></i>
+                                <h6>Community Support Network</h6>
+                            </div>
+                            <p class="text-muted small">Connect victims with verified support volunteers and mental health professionals.</p>
+                            <div class="tool-stats">
+                                <span class="badge bg-primary">23 active sessions</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-primary">Access Network</button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 mb-3">
+                        <div class="support-tool">
+                            <div class="tool-header">
+                                <i class="fas fa-book-open text-success"></i>
+                                <h6>Digital Wellness Resources</h6>
+                            </div>
+                            <p class="text-muted small">Curated educational content about online safety, digital citizenship, and resilience building.</p>
+                            <div class="tool-stats">
+                                <span class="badge bg-success">1,247 resources</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-success">Browse Resources</button>
+                        </div>
+                    </div>
+                    
+                    <div class="col-lg-4 mb-3">
+                        <div class="support-tool">
+                            <div class="tool-header">
+                                <i class="fas fa-chart-pie text-info"></i>
+                                <h6>Recovery Progress Tracking</h6>
+                            </div>
+                            <p class="text-muted small">Monitor victim recovery through engagement patterns, sentiment analysis, and self-reported wellness.</p>
+                            <div class="tool-stats">
+                                <span class="badge bg-info">89% recovery rate</span>
+                            </div>
+                            <button class="btn btn-sm btn-outline-info">View Analytics</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+.protection-header {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(23, 162, 184, 0.1) 100%);
+    border-radius: 10px;
+    margin: -1rem -15px 0 -15px;
+    padding: 2rem 15px;
+}
+
+.protection-status {
+    display: flex;
+    align-items: center;
+}
+
+.status-indicator {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+}
+
+.status-indicator.active {
+    background-color: #28a745;
+    animation: pulse 2s infinite;
+}
+
+.status-text {
+    font-weight: 600;
+    color: #28a745;
+}
+
+.protection-metric-card {
+    border-radius: 12px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    color: white;
+}
+
+.protection-metric-card:hover {
+    transform: translateY(-3px);
+}
+
+.protection-metric-card.incidents-blocked {
+    background: linear-gradient(135deg, #dc3545, #c82333);
+}
+
+.protection-metric-card.victims-protected {
+    background: linear-gradient(135deg, #28a745, #218838);
+}
+
+.protection-metric-card.interventions {
+    background: linear-gradient(135deg, #17a2b8, #138496);
+}
+
+.protection-metric-card.prevention-rate {
+    background: linear-gradient(135deg, #6f42c1, #59359a);
+}
+
+.incident-stream {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.incident-item {
+    display: flex;
+    align-items: flex-start;
+    padding: 1.5rem;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.incident-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.incident-item.severity-high {
+    background: rgba(220, 53, 69, 0.1);
+    border-left: 4px solid #dc3545;
+}
+
+.incident-item.severity-medium {
+    background: rgba(255, 193, 7, 0.1);
+    border-left: 4px solid #ffc107;
+}
+
+.incident-item.severity-low {
+    background: rgba(23, 162, 184, 0.1);
+    border-left: 4px solid #17a2b8;
+}
+
+.incident-indicator {
+    margin-right: 1rem;
+    text-align: center;
+}
+
+.severity-badge {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 0.5rem;
+}
+
+.severity-badge.high {
+    background: #dc3545;
+}
+
+.severity-badge.medium {
+    background: #ffc107;
+    color: #212529;
+}
+
+.severity-badge.low {
+    background: #17a2b8;
+}
+
+.incident-type {
+    font-size: 0.8rem;
+    color: #6c757d;
+    font-weight: 600;
+}
+
+.incident-details {
+    flex-grow: 1;
+    margin-right: 1rem;
+}
+
+.incident-title {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.incident-description {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.incident-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.incident-meta span {
+    font-size: 0.8rem;
+    color: #adb5bd;
+}
+
+.victim-impact {
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.incident-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.protection-insight {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.insight-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    color: white;
+    font-size: 1rem;
+}
+
+.insight-content h6 {
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+}
+
+.crisis-resource {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #e9ecef;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.resource-icon {
+    margin-right: 1rem;
+    font-size: 1.5rem;
+}
+
+.resource-info {
+    flex-grow: 1;
+}
+
+.resource-info h6 {
+    margin-bottom: 0.25rem;
+    color: #2c3e50;
+}
+
+.intervention-strategy, .support-tool {
+    text-align: center;
+    padding: 1.5rem;
+    border: 1px solid #e9ecef;
+    border-radius: 10px;
+    height: 100%;
+    transition: all 0.3s ease;
+}
+
+.intervention-strategy:hover, .support-tool:hover {
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    transform: translateY(-3px);
+}
+
+.strategy-icon, .tool-header i {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.strategy-content h6, .tool-header h6 {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.strategy-stats {
+    margin: 1rem 0;
+}
+
+.demographic-analysis {
+    padding: 1rem 0;
+}
+
+.demo-item {
+    margin-bottom: 2rem;
+}
+
+.demo-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+}
+
+.demo-bar {
+    display: flex;
+    height: 30px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #e9ecef;
+}
+
+.demo-segment {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.3);
+}
+
+.demo-segment.teens {
+    background: #dc3545;
+}
+
+.demo-segment.young-adults {
+    background: #ffc107;
+    color: #212529;
+}
+
+.demo-segment.adults {
+    background: #28a745;
+}
+
+.demo-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+}
+
+.demo-stat {
+    padding: 0.5rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    text-align: center;
+}
+
+.attack-vectors {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.vector-tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: white;
+}
+
+.vector-tag.appearance {
+    background: #dc3545;
+}
+
+.vector-tag.identity {
+    background: #6f42c1;
+}
+
+.vector-tag.content {
+    background: #fd7e14;
+}
+
+.vector-tag.personal {
+    background: #e83e8c;
+}
+
+.tool-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.tool-header i {
+    margin-right: 0.5rem;
+    width: auto;
+    height: auto;
+    font-size: 1.5rem;
+}
+
+.tool-stats {
+    margin: 1rem 0;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Bullying Trends Chart
+const trendsCtx = document.getElementById('bullyingTrendsChart').getContext('2d');
+const trendsChart = new Chart(trendsCtx, {
+    type: 'line',
+    data: {
+        labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+        datasets: [{
+            label: 'Incidents Detected',
+            data: [45, 38, 42, 51, 39, 28, 22],
+            borderColor: '#dc3545',
+            backgroundColor: 'rgba(220, 53, 69, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: 'Incidents Prevented',
+            data: [43, 35, 39, 48, 37, 26, 20],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            fill: false
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    color: 'rgba(0,0,0,0.05)'
+                }
+            },
+            x: {
+                grid: {
+                    display: false
+                }
+            }
+        }
+    }
+});
+
+// Simulate real-time incident updates
+function addNewIncident() {
+    const incidentTypes = [
+        {
+            severity: 'high',
+            type: 'Coordinated Harassment',
+            title: 'Multiple users targeting vulnerable teen',
+            description: 'AI detected coordinated attack pattern involving appearance-based harassment.',
+            time: 'Just now',
+            participants: Math.floor(Math.random() * 8) + 2,
+            platform: ['Instagram', 'TikTok', 'Twitter'][Math.floor(Math.random() * 3)]
+        },
+        {
+            severity: 'medium',
+            type: 'Persistent Harassment',
+            title: 'Repeated targeting detected',
+            description: 'Single user showing persistent hostile behavior across multiple posts.',
+            time: 'Just now',
+            participants: 1,
+            platform: ['YouTube', 'Twitter', 'Instagram'][Math.floor(Math.random() * 3)]
+        },
+        {
+            severity: 'low',
+            type: 'Early Warning',
+            title: 'Potential escalation risk identified',
+            description: 'AI detected conversation pattern with high bullying probability.',
+            time: 'Just now',
+            participants: Math.floor(Math.random() * 4) + 2,
+            platform: ['TikTok', 'Instagram', 'YouTube'][Math.floor(Math.random() * 3)]
+        }
+    ];
+    
+    const incident = incidentTypes[Math.floor(Math.random() * incidentTypes.length)];
+    console.log('New incident detected:', incident);
+    
+    // Update incident count
+    const countElement = document.querySelector('.incident-count');
+    const currentCount = parseInt(countElement.textContent.match(/\d+/)[0]);
+    countElement.textContent = `${currentCount + 1} Active Incidents`;
+    
+    // In a real implementation, you would add the incident to the stream
+    // and potentially trigger notifications
+}
+
+// Simulate real-time updates
+setInterval(() => {
+    // Small chance of new incident
+    if (Math.random() < 0.1) { // 10% chance every 10 seconds
+        addNewIncident();
+    }
+    
+    // Update metrics with small random changes
+    const metrics = document.querySelectorAll('.metric-number');
+    metrics.forEach(metric => {
+        if (!metric.textContent.includes('%')) {
+            const current = parseInt(metric.textContent);
+            const variation = Math.floor(Math.random() * 3) - 1; // -1, 0, or 1
+            const newValue = Math.max(0, current + variation);
+            metric.textContent = newValue;
+        }
+    });
+}, 10000); // Every 10 seconds
+
+// Incident action handlers
+function blockAllAttackers(incidentId) {
+    console.log('Blocking all attackers for incident:', incidentId);
+    alert('All identified attackers have been automatically blocked.');
+}
+
+function protectVictim(victimId) {
+    console.log('Activating protection for:', victimId);
+    alert('Enhanced protection activated for victim. Comments will be pre-screened.');
+}
+
+function monitorIncident(incidentId) {
+    console.log('Setting up monitoring for incident:', incidentId);
+    alert('Continuous monitoring activated. You will receive updates on any escalation.');
+}
+
+// Crisis support functions
+function connectToCounseling() {
+    console.log('Connecting to online counseling');
+    alert('Connecting you to a licensed mental health professional...');
+}
+
+function joinSupportGroup() {
+    console.log('Joining peer support group');
+    alert('Connecting you to our community support network...');
+}
+
+// Initialize dashboard
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Anti-Cyberbullying Protection Center initialized');
+    
+    // Set up event handlers for incident actions
+    document.querySelectorAll('.incident-actions button').forEach(button => {
+        button.addEventListener('click', function() {
+            const action = this.textContent.trim();
+            console.log('Incident action triggered:', action);
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}SenTox Multi-Agent Content Moderation Platform{% endblock %}</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Progress visualization styles -->
+    <link href="{{ url_for('static', filename='css/progress_visualization.css') }}" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --success-color: #27ae60;
+            --warning-color: #f39c12;
+            --danger-color: #e74c3c;
+            --light-bg: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--light-bg);
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: bold;
+            color: white !important;
+        }
+        
+        .nav-link {
+            color: rgba(255,255,255,0.9) !important;
+            transition: color 0.3s;
+        }
+        
+        .nav-link:hover {
+            color: white !important;
+        }
+        
+        .main-content {
+            margin-top: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            border-radius: 10px 10px 0 0 !important;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            border: none;
+            border-radius: 25px;
+            padding: 10px 25px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .alert {
+            border-radius: 10px;
+            border: none;
+        }
+        
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 4rem;
+        }
+        
+        .stats-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .stats-card h3 {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--secondary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .agent-status {
+            padding: 0.25rem 0.5rem;
+            border-radius: 15px;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+        
+        .agent-status.healthy {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .agent-status.processing {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .agent-status.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .thought-chain {
+            background-color: #f8f9fa;
+            border-left: 4px solid var(--secondary-color);
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .confidence-bar {
+            height: 8px;
+            background-color: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .confidence-fill {
+            height: 100%;
+            transition: width 0.5s ease;
+        }
+        
+        .confidence-high { background-color: var(--success-color); }
+        .confidence-medium { background-color: var(--warning-color); }
+        .confidence-low { background-color: var(--danger-color); }
+        
+        @media (max-width: 768px) {
+            .stats-card h3 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    <!-- Navigation bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                <i class="fas fa-shield-alt me-2"></i>
+                SenTox AI Moderation Platform
+            </a>
+            
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.index') }}">
+                            <i class="fas fa-home me-1"></i>Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.submit_content') }}">
+                            <i class="fas fa-upload me-1"></i>Content Moderation
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="analyticsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-chart-bar me-1"></i>Analytics
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('main.analytics') }}">
+                                <i class="fas fa-chart-line me-2"></i>Basic Analytics
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.professional_dashboard') }}">
+                                <i class="fas fa-tachometer-alt me-2"></i>Professional Dashboard
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.comment_environment_analysis') }}">
+                                <i class="fas fa-comments me-2"></i>Environment Analysis
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="toolsDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-tools me-1"></i>Creator Tools
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('main.client_hub') }}">
+                                <i class="fas fa-plug me-2"></i>Integration Hub
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.smart_comment_filter') }}">
+                                <i class="fas fa-filter me-2"></i>Smart Comment Filter
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.creator_protection_center') }}">
+                                <i class="fas fa-user-shield me-2"></i>Protection Center
+                            </a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="securityDropdown" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-shield-alt me-1"></i>Security & Safety
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url_for('main.user_behavior_profiling') }}">
+                                <i class="fas fa-user-shield me-2"></i>Behavior Profiling
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.cyberbullying_prevention') }}">
+                                <i class="fas fa-shield-heart me-2"></i>Anti-Cyberbullying
+                            </a></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.harassment_detection') }}">
+                                <i class="fas fa-network-wired me-2"></i>Harassment Detection
+                            </a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="{{ url_for('main.mental_health_support') }}">
+                                <i class="fas fa-heart me-2"></i>Mental Health Support
+                            </a></li>
+                        </ul>
+                    </li>
+                    {% if current_user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('main.realtime_monitor') }}">
+                            <i class="fas fa-eye me-1"></i>Real-time Monitoring
+                        </a>
+                    </li>
+                    {% endif %}
+                </ul>
+                
+                <ul class="navbar-nav">
+                    {% if current_user.is_authenticated %}
+                        {% if current_user.role == 'admin' %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('admin.dashboard') }}">
+                                <i class="fas fa-cog me-1"></i>Admin Dashboard
+                            </a>
+                        </li>
+                        {% endif %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                                <i class="fas fa-user me-1"></i>{{ current_user.username }}
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{{ url_for('main.profile') }}">
+                                    <i class="fas fa-user-circle me-2"></i>Profile
+                                </a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ url_for('main.logout') }}">
+                                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                </a></li>
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('main.login') }}">
+                                <i class="fas fa-sign-in-alt me-1"></i>Login
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('main.register') }}">
+                                <i class="fas fa-user-plus me-1"></i>Register
+                            </a>
+                        </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Flash messages -->
+    <div class="container mt-3">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ 'danger' if category == 'error' else category }} alert-dismissible fade show" role="alert">
+                        {% if category == 'success' %}
+                            <i class="fas fa-check-circle me-2"></i>
+                        {% elif category == 'error' %}
+                            <i class="fas fa-exclamation-triangle me-2"></i>
+                        {% elif category == 'info' %}
+                            <i class="fas fa-info-circle me-2"></i>
+                        {% endif %}
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    
+    <!-- Main content -->
+    <div class="container main-content">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5><i class="fas fa-shield-alt me-2"></i>SenTox AI Moderation Platform</h5>
+                    <p class="mb-0">Based on three cutting-edge research achievements: ICL-DiTox, SenTox-GLDA, and TMuS-Toxgent</p>
+                    <small class="text-muted">Multi-agent collaborative architecture providing enterprise-grade content security solutions</small>
+                </div>
+                <div class="col-md-3">
+                    <h6>Core Technologies</h6>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-robot me-2"></i>Multi-agent Collaboration</li>
+                        <li><i class="fas fa-brain me-2"></i>Chain of Thought Reasoning</li>
+                        <li><i class="fas fa-link me-2"></i>Chain of Action Execution</li>
+                        <li><i class="fas fa-atom me-2"></i>GLDA Attention Mechanism</li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h6>Application Scenarios</h6>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-comments me-2"></i>Social Media Platforms</li>
+                        <li><i class="fas fa-shopping-cart me-2"></i>E-commerce Reviews</li>
+                        <li><i class="fas fa-newspaper me-2"></i>News Comments</li>
+                        <li><i class="fas fa-gamepad me-2"></i>Gaming Communities</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4" style="border-color: rgba(255,255,255,0.2);">
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2024 SenTox AI Moderation Platform. Research Achievement Transformation Project</p>
+                    <small class="text-muted">Based on ICL-DiTox + SenTox-GLDA + TMuS-Toxgent research achievements</small>
+                </div>
+                <div class="col-md-6 text-end">
+                    <small class="text-muted">
+                        <i class="fas fa-code me-1"></i>Tech Stack: Flask + Alibaba Cloud Bailian + Global-Local-Differential Attention
+                    </small>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Progress visualization JS -->
+    <script src="{{ url_for('static', filename='js/progress_visualization.js') }}"></script>
+    
+    <!-- Custom JavaScript -->
+    <script>
+        // Confidence bar animation
+        function animateConfidenceBars() {
+            const bars = document.querySelectorAll('.confidence-fill');
+            bars.forEach(bar => {
+                const confidence = parseFloat(bar.dataset.confidence || 0);
+                const width = confidence * 100;
+                bar.style.width = width + '%';
+                
+                // Set color based on confidence level
+                if (confidence >= 0.8) {
+                    bar.classList.add('confidence-high');
+                } else if (confidence >= 0.6) {
+                    bar.classList.add('confidence-medium');
+                } else {
+                    bar.classList.add('confidence-low');
+                }
+            });
+        }
+        
+        // Execute animation after page load
+        document.addEventListener('DOMContentLoaded', function() {
+            animateConfidenceBars();
+        });
+        
+        // Initialize tooltips
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        });
+    </script>
+    
+    {% block extra_js %}{% endblock %}
+</body>
+</html>
